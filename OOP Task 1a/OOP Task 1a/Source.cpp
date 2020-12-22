@@ -43,6 +43,7 @@ int main()
                     case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, LIGHTGRAY); break;
                     case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
                     case ENEMY:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);       break;
+                    case PLAYERPROJECTILE: DrawRectangle(xPosition, yPosition, cellSize, cellSize, WHITE); break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }
 
