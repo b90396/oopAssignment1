@@ -11,7 +11,7 @@ public:
 	int getYPos() const;
 	int getXPos() const;
 	void setXPos();
-	void setIsHit();
+	bool setIsHit();
 	bool getIsHit();
 	void setSpeed();
 	int getSpeed();
