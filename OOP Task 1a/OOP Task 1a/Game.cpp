@@ -86,9 +86,9 @@ bool Game::IsEnemyAtPosition(int x, int y)
             return true;
         }
 
-        return false;
+        
     }
-
+    return false;
 }
 
 bool Game::IsRunning()
