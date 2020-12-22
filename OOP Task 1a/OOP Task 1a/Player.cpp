@@ -68,3 +68,38 @@ void Player::PositionAtStartingPosition()
     x = SIZE / 2;
     y = SIZE;
 }
+
+void Player::Shoot(int xPosition)
+{
+
+}
+
+int Player::getScore()
+{
+    return score;
+}
+
+void Player::resetScore()
+{
+    score = 0;
+}
+
+void Player::incrementScore()
+{
+    score++;
+}
+
+int Player::getLives()
+{
+    return lives;
+}
+
+void Player::setLives()
+{
+    lives = 3;
+}
+
+void Player::decreaseLives()
+{
+    lives--;
+}

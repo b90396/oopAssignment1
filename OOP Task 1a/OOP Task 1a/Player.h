@@ -13,21 +13,23 @@ class Player
         int GetY();
         char GetSymbol() const;
         bool IsAtPosition(int x, int y);
-        void Shoot(int xPosition);
         int getScore();
-        void resetScore();
-        void incrementScore();
         int getLives();
-        void setLives();
-        void decreaseLives();
+
 
         
 
         // mutators
         void Move(int key);
+        void resetScore();
+        void incrementScore();
+        void setLives();
+        void decreaseLives();
 
         char symbol;
         int  x, y;
+
+        void Shoot(int xPosition);
 
     private:
         // data members
