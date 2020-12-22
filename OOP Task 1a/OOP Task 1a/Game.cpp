@@ -3,20 +3,31 @@
 void Game::Setup()
 {
     // block one
-    walls.push_back(Wall(2, 18));
-    walls.push_back(Wall(3, 18));
-    walls.push_back(Wall(4, 18));
-    walls.push_back(Wall(5, 18));
+    walls.push_back(Wall(2, 17));
+    walls.push_back(Wall(3, 17));
+    walls.push_back(Wall(4, 17));
+    walls.push_back(Wall(5, 17));
 
-    walls.push_back(Wall(8, 18));
-    walls.push_back(Wall(9, 18));
-    walls.push_back(Wall(10, 18));
-    walls.push_back(Wall(11, 18));
+    walls.push_back(Wall(3, 16));
+    walls.push_back(Wall(4, 16));
 
-    walls.push_back(Wall(14, 18));
-    walls.push_back(Wall(15, 18));
-    walls.push_back(Wall(16, 18));
-    walls.push_back(Wall(17, 18));
+    // block two
+    walls.push_back(Wall(9, 17));
+    walls.push_back(Wall(10, 17));
+    walls.push_back(Wall(11, 17));
+    walls.push_back(Wall(12, 17));
+
+    walls.push_back(Wall(10, 16));
+    walls.push_back(Wall(11, 16));
+
+    // block three
+    walls.push_back(Wall(16, 17));
+    walls.push_back(Wall(17, 17));
+    walls.push_back(Wall(18, 17));
+    walls.push_back(Wall(19, 17));
+
+    walls.push_back(Wall(17, 16));
+    walls.push_back(Wall(18, 16));
 
     //CREATE ENEMIES HERE
 
