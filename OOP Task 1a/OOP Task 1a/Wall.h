@@ -7,19 +7,21 @@ using namespace std;
 
 class Wall
 {
+    private:
+        // Attributes...
+        char symbol;
+        int x, y;
     public:
         // constructors
         Wall();
         Wall(int x, int y);
+        ~Wall() {};
 
-        // assessors
-        int GetX();
-        int GetY();
-        char GetSymbol() const;
+        // Mutator Methods...
         bool IsAtPosition(int x, int y);
 
-    private:
-        // data members
-        char symbol;
-        int x, y;
+        // Accessor methods...
+        int GetX() const;
+        int GetY() const;
+        char GetSymbol() const;
 };

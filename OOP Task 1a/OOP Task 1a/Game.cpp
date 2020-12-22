@@ -2,9 +2,32 @@
 
 void Game::Setup()
 {
-    walls.push_back(Wall(4, 7));
-    walls.push_back(Wall(9, 15));
-    walls.push_back(Wall(15, 4));
+    // block one
+    walls.push_back(Wall(2, 17));
+    walls.push_back(Wall(3, 17));
+    walls.push_back(Wall(4, 17));
+    walls.push_back(Wall(5, 17));
+
+    walls.push_back(Wall(3, 16));
+    walls.push_back(Wall(4, 16));
+
+    // block two
+    walls.push_back(Wall(9, 17));
+    walls.push_back(Wall(10, 17));
+    walls.push_back(Wall(11, 17));
+    walls.push_back(Wall(12, 17));
+
+    walls.push_back(Wall(10, 16));
+    walls.push_back(Wall(11, 16));
+
+    // block three
+    walls.push_back(Wall(16, 17));
+    walls.push_back(Wall(17, 17));
+    walls.push_back(Wall(18, 17));
+    walls.push_back(Wall(19, 17));
+
+    walls.push_back(Wall(17, 16));
+    walls.push_back(Wall(18, 16));
 
     //CREATE ENEMIES HERE
 
@@ -39,18 +62,18 @@ vector<vector<char>> Game::PrepareGrid()
         // for each column, work out what's in that position and add the relevant char to the 2D grid
         for (int col = 1; col <= SIZE; ++col)
         {
-            if (row == player.GetY() && col == player.GetX())
+            if (row == player.GetY() && col == player.GetX())   // create player.
             {
                 line.push_back(player.GetSymbol());
             }
-           /* else if (IsWallAtPosition(col, row))       SET AS BARRIER INSTEAD OF WALL
+            else if (IsWallAtPosition(col, row))                // create wall.
             {
                 line.push_back(WALL);
-            }*/
-            else if(IsEnemyAtPosition(col, row))
+            }
+            else if(IsEnemyAtPosition(col, row))                // create enemy.
             {
                 line.push_back(ENEMY);
-            }
+            }                                                   
             else
             {
                 line.push_back(FLOOR);
@@ -85,10 +108,8 @@ bool Game::IsEnemyAtPosition(int x, int y)
         {
             return true;
         }
-
-        return false;
     }
-
+    return false;
 }
 
 bool Game::IsRunning()

@@ -5,10 +5,10 @@
 
 // symbols used for storing where things are
 #define PLAYER    'P'
-#define HOLE      'H'
 #define WALL      'W'
 #define FLOOR     'F'
 #define ENEMY	  'E'
+#define PLAYERPROJECTILE 'R'
 
 // the command letters to move the mouse on the maze
 #define KEY_RIGHT 262
