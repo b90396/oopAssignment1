@@ -9,7 +9,7 @@ public:
 
 private:
 
-	bool hasHitPlayer();
+	bool hasHitPlayer;
 
 };
 
