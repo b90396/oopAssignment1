@@ -5,7 +5,6 @@
 
 // symbols used for storing where things are
 #define PLAYER    'P'
-#define HOLE      'H'
 #define WALL      'W'
 #define FLOOR     'F'
 #define ENEMY	  'E'
