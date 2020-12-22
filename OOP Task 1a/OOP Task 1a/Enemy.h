@@ -20,9 +20,9 @@ public:
 private:
 	int xPos;
 	int yPos;
-	bool isHit;
-	int speed;
-	int moveCounter;
+	bool isHit = false;
+	int speed = 0;
+	int moveCounter = 0;
 
 };
 
