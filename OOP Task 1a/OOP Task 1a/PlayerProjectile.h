@@ -4,12 +4,12 @@ class PlayerProjectile : Projectile
 {
 public:
 
-	void setHasHitEnemy();
+	void setHasHitEnemy(bool HHE);
 	bool getHasHitEnemy();
 
 private:
 
-	bool hasHitEnemy();
+	bool hasHitEnemy;
 
 
 
