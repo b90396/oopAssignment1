@@ -2,9 +2,21 @@
 
 void Game::Setup()
 {
-    walls.push_back(Wall(4, 7));
-    walls.push_back(Wall(9, 15));
-    walls.push_back(Wall(15, 4));
+    // block one
+    walls.push_back(Wall(2, 18));
+    walls.push_back(Wall(3, 18));
+    walls.push_back(Wall(4, 18));
+    walls.push_back(Wall(5, 18));
+
+    walls.push_back(Wall(8, 18));
+    walls.push_back(Wall(9, 18));
+    walls.push_back(Wall(10, 18));
+    walls.push_back(Wall(11, 18));
+
+    walls.push_back(Wall(14, 18));
+    walls.push_back(Wall(15, 18));
+    walls.push_back(Wall(16, 18));
+    walls.push_back(Wall(17, 18));
 
     //CREATE ENEMIES HERE
 
@@ -39,18 +51,18 @@ vector<vector<char>> Game::PrepareGrid()
         // for each column, work out what's in that position and add the relevant char to the 2D grid
         for (int col = 1; col <= SIZE; ++col)
         {
-            if (row == player.GetY() && col == player.GetX())
+            if (row == player.GetY() && col == player.GetX())   // create player.
             {
                 line.push_back(player.GetSymbol());
             }
-           /* else if (IsWallAtPosition(col, row))       SET AS BARRIER INSTEAD OF WALL
+            else if (IsWallAtPosition(col, row))                // create wall.
             {
                 line.push_back(WALL);
-            }*/
-            else if(IsEnemyAtPosition(col, row))
+            }
+            else if(IsEnemyAtPosition(col, row))                // create enemy.
             {
                 line.push_back(ENEMY);
-            }
+            }                                                   
             else
             {
                 line.push_back(FLOOR);
@@ -85,10 +97,9 @@ bool Game::IsEnemyAtPosition(int x, int y)
         {
             return true;
         }
-
-        return false;
     }
 
+    return false;
 }
 
 bool Game::IsRunning()

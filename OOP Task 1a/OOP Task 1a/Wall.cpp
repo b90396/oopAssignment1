@@ -2,21 +2,27 @@
 
 Wall::Wall()
 {
+    symbol = WALL;
 }
 
 Wall::Wall(int x, int y)
 {
-    symbol = HOLE;
+    symbol = WALL;
     this->x = x;
     this->y = y;
 }
 
-int Wall::GetX()
+bool Wall::IsAtPosition(int x, int y)
+{
+    return (this->x == x) && (this->y == y);
+}
+
+int Wall::GetX() const
 {
     return x;
 }
 
-int Wall::GetY()
+int Wall::GetY() const
 {
     return y;
 }
@@ -24,9 +30,4 @@ int Wall::GetY()
 char Wall::GetSymbol() const
 {
     return symbol;
-}
-
-bool Wall::IsAtPosition(int x, int y)
-{
-    return this->x == x && this->y == y;
 }
