@@ -110,8 +110,8 @@ bool Game::IsEnemyAtPosition(int x, int y)
         }
     }
 
-    return false;
-}
+        return false;
+    }
 
 bool Game::IsRunning()
 {
