@@ -27,7 +27,7 @@ class Player
         void decreaseLives();
         char symbol;
         int  x, y;
-        void Shoot(int key);
+        void Shoot();
 
     private:
         // data members
