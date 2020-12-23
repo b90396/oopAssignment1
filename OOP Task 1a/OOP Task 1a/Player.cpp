@@ -48,6 +48,7 @@ void Player::Move(int key)
     case KEY_SPACE:
         Shoot();
         break;
+        //Detected but not registered properly and affects movement, No Idea Why
     default:
         // not a key we care about, so do nothing
         break;

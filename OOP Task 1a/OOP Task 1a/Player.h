@@ -28,6 +28,7 @@ class Player
         char symbol;
         int  x, y;
         void Shoot();
+        //Removed the x for testing purposes
 
     private:
         // data members
