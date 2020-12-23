@@ -15,7 +15,7 @@ public:
 	bool getIsHit();
 	void setSpeed();
 	int getSpeed();
-	void move();	//check position within here with move counter
+	void move(char direction);	//check position within here with move counter
 
 private:
 	int xPos;
