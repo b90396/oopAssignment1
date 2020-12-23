@@ -20,6 +20,7 @@ int main()
         {
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
+            if (IsKeyPressed(KEY_SPACE)) game.ProcessInput(KEY_SPACE);
             //if (IsKeyPressed(KEY_UP))     game.ProcessInput(KEY_UP);
             //if (IsKeyPressed(KEY_DOWN))   game.ProcessInput(KEY_DOWN);
 

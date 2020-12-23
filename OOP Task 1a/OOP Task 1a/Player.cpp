@@ -27,6 +27,7 @@ bool Player::IsAtPosition(int x, int y)
 
 void Player::Move(int key)
 {
+    int i = 0;
     switch (key)
     {
     case KEY_LEFT:
@@ -69,9 +70,13 @@ void Player::PositionAtStartingPosition()
     y = SIZE;
 }
 
-void Player::Shoot(int xPosition)
+void Player::Shoot(int key)
 {
-
+    int i = 0;
+    if (KEY_SPACE)
+    {
+        i++;
+    }
 }
 
 int Player::getScore()
