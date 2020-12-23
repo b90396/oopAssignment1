@@ -25,11 +25,9 @@ class Player
         void incrementScore();
         void setLives();
         void decreaseLives();
-
         char symbol;
         int  x, y;
-
-        void Shoot(int xPosition);
+        void Shoot(int key);
 
     private:
         // data members

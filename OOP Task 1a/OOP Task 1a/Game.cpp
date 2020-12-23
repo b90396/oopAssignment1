@@ -41,6 +41,7 @@ void Game::Setup()
 
 void Game::ProcessInput(int key)
 {
+    player.Shoot(key);
     player.Move(key);
 }
 

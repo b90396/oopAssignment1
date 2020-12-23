@@ -9,5 +9,3 @@ bool EnemyProjectile::getHasHitPlayer()
 {
 	return hasHitPlayer;
 }
-
-
