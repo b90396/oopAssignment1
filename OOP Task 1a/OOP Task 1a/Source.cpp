@@ -8,6 +8,8 @@ int main()
 
     Game game;
     game.Setup();
+    float timeDelayForEnemyMovement = 0;
+    int directionCounter = 0;
 
     while (!WindowShouldClose())
     {
@@ -20,6 +22,45 @@ int main()
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
             //if (IsKeyPressed(KEY_UP))     game.ProcessInput(KEY_UP);
             //if (IsKeyPressed(KEY_DOWN))   game.ProcessInput(KEY_DOWN);
+
+            timeDelayForEnemyMovement += GetFrameTime();
+            if (timeDelayForEnemyMovement - 1 >= 0)
+            {
+                for (int i = 0; i < game.enemies.size(); i++)
+                {
+                    if (directionCounter < 8)
+                    {
+                        game.enemies[i].move('R');
+                    }
+                    
+                    if (directionCounter >= 8 && directionCounter < 17)
+                    {
+                        game.enemies[i].move('L');
+                    }
+                    
+                    if (directionCounter == 17)
+                    {
+                        game.enemies[i].move('D');
+                        
+                    }
+
+                    
+                    //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
+                    
+                }
+                if (directionCounter == 17)
+                {
+                    directionCounter = 0;
+
+                }
+                else
+                {
+                    directionCounter++;
+                }
+                
+                
+                timeDelayForEnemyMovement = 0;
+            }
         }
         else
         {

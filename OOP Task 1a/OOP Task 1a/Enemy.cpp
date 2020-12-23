@@ -55,8 +55,20 @@ int Enemy::getSpeed()
 	return speed;
 }
 
-void Enemy::move()
+void Enemy::move(char direction)
 {
-	// While Player::isAlive xpos +/- 1 every x seconds (by speed) if xpos == end of grid
-	// ypos +/- 1 then xpos +/- 1.
+	if (direction == 'L')
+	{
+		xPos -= 1;
+	}
+
+	if (direction == 'R')
+	{
+		xPos += 1;
+	}
+
+	if (direction == 'D')
+	{
+		yPos += 1;
+	}
 }

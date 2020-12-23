@@ -31,12 +31,12 @@ void Game::Setup()
 
     //CREATE ENEMIES HERE
 
-    enemies.push_back(Enemy(5, 2));
+    enemies.push_back(Enemy(2, 2));
+    enemies.push_back(Enemy(4, 2));
     enemies.push_back(Enemy(6, 2));
-    enemies.push_back(Enemy(7, 2));
     enemies.push_back(Enemy(8, 2));
-    enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(10, 2));
+    enemies.push_back(Enemy(12, 2));
 }
 
 void Game::ProcessInput(int key)
@@ -119,3 +119,4 @@ bool Game::IsRunning()
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
     return true;
 }
+

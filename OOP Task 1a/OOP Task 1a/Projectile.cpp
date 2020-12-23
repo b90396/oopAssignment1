@@ -43,17 +43,17 @@ bool Projectile::getHasHitProjectile() const
 }
 
 // Mutator Methods.
-int Projectile::setXPos(int x)
+void Projectile::setXPos(int x)
 {
 	this->x = x;
 }
 
-int Projectile::setYPos(int y)
+void Projectile::setYPos(int y)
 {
 	this->y = y;
 }
 
-float Projectile::setSpeed(float speed)
+void Projectile::setSpeed(float speed)
 {
 	this->speed = speed;
 }

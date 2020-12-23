@@ -22,9 +22,9 @@ public:
 	bool getHasHitProjectile() const;
 
 	// Mutator Methods.
-	int setXPos( int x );
-	int setYPos( int y );
-	float setSpeed( float speed );
+	void setXPos( int x );
+	void setYPos( int y );
+	void setSpeed( float speed );
 	void setHasHitBarrier( bool value );
 	void setHasHitProjectile( bool value );
 
