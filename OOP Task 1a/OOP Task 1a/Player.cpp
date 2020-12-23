@@ -27,7 +27,6 @@ bool Player::IsAtPosition(int x, int y)
 
 void Player::Move(int key)
 {
-    int i = 0;
     switch (key)
     {
     case KEY_LEFT:
@@ -46,6 +45,10 @@ void Player::Move(int key)
         dx = 0;
         dy = +1;
         break;
+    case KEY_SPACE:
+        Shoot();
+        break;
+        //Detected but not registered properly and affects movement, No Idea Why
     default:
         // not a key we care about, so do nothing
         break;
@@ -70,13 +73,9 @@ void Player::PositionAtStartingPosition()
     y = SIZE;
 }
 
-void Player::Shoot(int key)
+void Player::Shoot()
 {
-    int i = 0;
-    if (KEY_SPACE)
-    {
-        i++;
-    }
+
 }
 
 int Player::getScore()
