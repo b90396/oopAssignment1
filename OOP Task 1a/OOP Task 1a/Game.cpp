@@ -41,7 +41,6 @@ void Game::Setup()
 
 void Game::ProcessInput(int key)
 {
-    player.Shoot();
     //Added to Process Input for testing but doesn't work properly
     player.Move(key);
 }
