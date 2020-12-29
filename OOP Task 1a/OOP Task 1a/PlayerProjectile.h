@@ -6,7 +6,7 @@ public:
 
 	void setHasHitEnemy(bool HHE);
 	bool getHasHitEnemy();
-
+	using Projectile::Projectile;
 private:
 
 	bool hasHitEnemy;

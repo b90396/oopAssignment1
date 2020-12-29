@@ -7,6 +7,8 @@
 #include "Wall.h"
 #include "Enemy.h"
 #include "Projectile.h"
+#include "PlayerProjectile.h"
+#include "EnemyProjectile.h"
 
 using namespace std;
 
@@ -17,6 +19,8 @@ class Game
       vector<Wall> walls;
       vector<Enemy> enemies;
       vector<Projectile> projectiles;
+      vector<PlayerProjectile> playerprojectiles;
+      vector<EnemyProjectile> enemyprojectile;
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();

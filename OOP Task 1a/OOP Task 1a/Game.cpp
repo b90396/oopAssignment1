@@ -37,6 +37,7 @@ void Game::Setup()
     enemies.push_back(Enemy(7, 2));
     enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(11, 2));
+
 }
 
 void Game::ProcessInput(int key)
@@ -47,7 +48,6 @@ void Game::ProcessInput(int key)
     }
     else
     {
-        //Added to Process Input for testing but doesn't work properly
         player.Move(key);
     }
 

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerProjectile.h"
 
 Player::Player() : symbol(PLAYER), x(0), y(0), alive(true), escaped(false), dx(0), dy(0)
 {
@@ -45,10 +46,6 @@ void Player::Move(int key)
         dx = 0;
         dy = +1;
         break;
-    //case KEY_SPACE:
-    //    Shoot();
-    //    break;
-        //Detected but not registered properly and affects movement, No Idea Why
     default:
         // not a key we care about, so do nothing
         break;
@@ -75,7 +72,7 @@ void Player::PositionAtStartingPosition()
 
 void Player::Shoot()
 {
-    
+     PLAYERPROJECTILE.push_back(PlayerProjectile(GetX(), (GetY() + 2), 1));
 }
 
 int Player::getScore()
