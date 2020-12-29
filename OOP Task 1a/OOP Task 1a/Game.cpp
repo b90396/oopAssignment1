@@ -209,3 +209,7 @@ void Game::HandleEnemyProjectiles()
     }
 }
 
+int Game::getScore()
+{
+    return player.getScore();
+}
