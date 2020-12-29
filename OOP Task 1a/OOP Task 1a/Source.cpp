@@ -10,19 +10,25 @@ int main()
     game.Setup();
     float timeDelayForEnemyMovement = 0;
     int directionCounter = 0;
+    bool pause = false;
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(DARKGRAY);
 
-        if (game.IsRunning())
+        if (game.IsRunning() && !pause)
         {
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
             if (IsKeyPressed(KEY_SPACE)) game.ProcessInput(KEY_SPACE);
             //if (IsKeyPressed(KEY_UP))     game.ProcessInput(KEY_UP);
             //if (IsKeyPressed(KEY_DOWN))   game.ProcessInput(KEY_DOWN);
+
+            if (IsKeyPressed(KEY_P))
+            {
+                pause = true;
+            }
 
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
@@ -65,7 +71,13 @@ int main()
         }
         else
         {
-            DrawText("TODO: Why did the game end?", 610, 10, 20, LIGHTGRAY);
+            DrawText("PAUSED", 610, 10, 20, LIGHTGRAY);
+
+            if (IsKeyPressed(KEY_P))
+            {
+                pause = false;
+            }
+
         }
 
         const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
