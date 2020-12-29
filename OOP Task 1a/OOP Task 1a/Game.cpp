@@ -121,3 +121,82 @@ bool Game::IsRunning()
     return true;
 }
 
+void Game::HandlePlayerProjectiles()
+{
+    for (int i = 0; i < playerProjectiles.size(); i++)
+    {
+        for (int j = 0; j < enemies.size(); j++)
+        {
+            for (int k = 0; k < walls.size(); k++)
+            {
+                // Player Projectile hits an Enemy...
+                if ((playerProjectiles[i].getXPos() == enemies[j].getXPos()) && (playerProjectiles[i].getYPos() == enemies[j].getXPos()))
+                {
+                    // remove Projectile.
+                    playerProjectiles.erase(playerProjectiles.begin() + i);
+
+                    // remove Enemy.
+                    enemies.erase(enemies.begin() + j);
+                }
+
+                // Player Projectile hits a Wall piece...
+                if ((playerProjectiles[i].getXPos() == walls[k].GetX()) && (playerProjectiles[i].getYPos() == walls[k].GetY()))
+                {
+                    // remove Projectile.
+                    playerProjectiles.erase(playerProjectiles.begin() + i);
+
+                    // remove Wall piece.
+                    walls.erase(walls.begin() + k);
+                }
+
+                // Player Projectile reaches end of screen...
+                if (playerProjectiles[i].getYPos() < 0)
+                {
+                    // remove Projectile.
+                    playerProjectiles.erase(playerProjectiles.begin() + i); 
+                }
+            }
+        }
+    }
+}
+
+void Game::HandleEnemyProjectiles()
+{
+    for (int i = 0; i < enemyProjectiles.size(); i++)
+    {
+        for (int j = 0; j < walls.size(); i++)
+        {
+            // Enemy Projectile hits Player...
+            if ((enemyProjectiles[i].getXPos() == player.GetX()) && (enemyProjectiles[i].getYPos() == player.GetX()))
+            {
+                if (player.getLives() < 0)
+                {
+                    // Player lost...
+                }
+                else
+                {
+                    // Player lost a life...
+                    player.decreaseLives();
+                }
+            }
+
+            // Enemy Projectile hits Wall piece...
+            if ((enemyProjectiles[i].getXPos() == walls[j].GetX()) && (enemyProjectiles[i].getYPos() == walls[j].GetY()))
+            {
+                // remove Projectile.
+                enemyProjectiles.erase(enemyProjectiles.begin() + i);
+
+                // remove Wall piece.
+                walls.erase(walls.begin() + j);
+            }
+
+            // Enemy Projectile reaches end of screen...
+            if (enemyProjectiles[i].getYPos() > 600 )
+            {
+                // remove Projectile.
+                enemyProjectiles.erase(enemyProjectiles.begin() + i); 
+            }
+        }
+    }
+}
+
