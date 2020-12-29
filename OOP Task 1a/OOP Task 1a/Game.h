@@ -16,11 +16,16 @@ class Game
       Player player;
       vector<Wall> walls;
       vector<Enemy> enemies;
-      vector<Projectile> projectiles;
+      vector<Projectile> playerProjectiles;
+      vector<Projectile> enemyProjectiles;
+
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
       bool IsRunning();
       bool IsWallAtPosition(int x, int y);
       bool IsEnemyAtPosition(int x, int y);
+
+      void HandlePlayerProjectiles();
+      void HandleEnemyProjectiles();
 };
