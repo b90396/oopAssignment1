@@ -130,7 +130,3 @@ bool Game::IsRunning()
     return true;
 }
 
-void Game::getScore()
-{
-    player.getScore();
-}

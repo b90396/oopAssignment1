@@ -19,8 +19,6 @@ int main()
 
         if (game.IsRunning() && !pause)
         {
-            //DrawText(game.getScore(), 610, 10, 20, LIGHTGRAY);  //DOESNT WORK with getScore();
-
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
             if (IsKeyPressed(KEY_SPACE)) game.ProcessInput(KEY_SPACE);
