@@ -41,8 +41,17 @@ void Game::Setup()
 
 void Game::ProcessInput(int key)
 {
-    //Added to Process Input for testing but doesn't work properly
-    player.Move(key);
+    if (key == KEY_SPACE)
+    {
+        player.Shoot();
+    }
+    else
+    {
+        //Added to Process Input for testing but doesn't work properly
+        player.Move(key);
+    }
+
+
 }
 
 /// <summary>
