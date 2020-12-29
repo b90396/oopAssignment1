@@ -29,17 +29,17 @@ int main()
             {
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
-                    if (directionCounter < 8)
+                    if (directionCounter < 9)
                     {
                         game.enemies[i].move('R');
                     }
                     
-                    if (directionCounter >= 8 && directionCounter < 17)
+                    if (directionCounter >= 9 && directionCounter < 18)
                     {
                         game.enemies[i].move('L');
                     }
                     
-                    if (directionCounter == 17)
+                    if (directionCounter == 18)
                     {
                         game.enemies[i].move('D');
                         
@@ -49,7 +49,7 @@ int main()
                     //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
                     
                 }
-                if (directionCounter == 17)
+                if (directionCounter == 18)
                 {
                     directionCounter = 0;
 

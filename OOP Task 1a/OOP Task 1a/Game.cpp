@@ -31,12 +31,12 @@ void Game::Setup()
 
     //CREATE ENEMIES HERE
 
-    enemies.push_back(Enemy(2, 2));
-    enemies.push_back(Enemy(4, 2));
-    enemies.push_back(Enemy(6, 2));
-    enemies.push_back(Enemy(8, 2));
-    enemies.push_back(Enemy(10, 2));
-    enemies.push_back(Enemy(12, 2));
+    enemies.push_back(Enemy(1, 2));
+    enemies.push_back(Enemy(3, 2));
+    enemies.push_back(Enemy(5, 2));
+    enemies.push_back(Enemy(7, 2));
+    enemies.push_back(Enemy(9, 2));
+    enemies.push_back(Enemy(11, 2));
 }
 
 void Game::ProcessInput(int key)
