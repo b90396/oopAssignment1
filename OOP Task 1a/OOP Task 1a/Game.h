@@ -27,4 +27,5 @@ class Game
       bool IsRunning();
       bool IsWallAtPosition(int x, int y);
       bool IsEnemyAtPosition(int x, int y);
+      bool IsProjectileAtPosition(int x, int y);
 };

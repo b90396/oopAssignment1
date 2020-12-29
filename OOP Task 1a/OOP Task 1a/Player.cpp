@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Game.h"
 #include "PlayerProjectile.h"
 
 Player::Player() : symbol(PLAYER), x(0), y(0), alive(true), escaped(false), dx(0), dy(0)
@@ -70,9 +71,9 @@ void Player::PositionAtStartingPosition()
     y = SIZE;
 }
 
-void Player::Shoot()
+void Player::Shoot(vector<PlayerProjectile> &playerprojectiles)
 {
-     PLAYERPROJECTILE.push_back(PlayerProjectile(GetX(), (GetY() + 2), 1));
+     playerprojectiles.push_back(PlayerProjectile(GetX(), 4, 1));
 }
 
 int Player::getScore()

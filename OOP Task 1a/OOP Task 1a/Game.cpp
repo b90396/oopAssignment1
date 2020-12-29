@@ -44,7 +44,7 @@ void Game::ProcessInput(int key)
 {
     if (key == KEY_SPACE)
     {
-        player.Shoot();
+        player.Shoot(playerprojectiles);
     }
     else
     {
@@ -83,11 +83,16 @@ vector<vector<char>> Game::PrepareGrid()
             else if(IsEnemyAtPosition(col, row))                // create enemy.
             {
                 line.push_back(ENEMY);
-            }                                                   
+            }
+            /*else if (IsProjectileAtPosition(col, row))
+            {
+                line.push_back(PLAYERPROJECTILE);
+            }*/
             else
             {
                 line.push_back(FLOOR);
             }
+
         }
 
         // now that the row is full, add it to the 2D grid
