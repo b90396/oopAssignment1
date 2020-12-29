@@ -23,4 +23,5 @@ class Game
       bool IsRunning();
       bool IsWallAtPosition(int x, int y);
       bool IsEnemyAtPosition(int x, int y);
+      void getScore();
 };
