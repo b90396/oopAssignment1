@@ -21,8 +21,6 @@ class Player
         int getLives();
 
 
-        
-
         // mutators
         void Move(int key);
         void resetScore();

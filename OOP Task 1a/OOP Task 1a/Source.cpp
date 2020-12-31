@@ -18,6 +18,9 @@ int main()
         BeginDrawing();
         ClearBackground(DARKGRAY);
 
+        DrawText(FormatText("SCORE: %i", game.getScore()), 610, 30, 20, LIGHTGRAY);
+        
+
         if (game.IsRunning() && !pause)
         {
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
