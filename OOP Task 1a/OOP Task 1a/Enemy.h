@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include "EnemyProjectile.h"
+
+using namespace std;
 class Enemy
 {
 
@@ -8,14 +12,15 @@ public:
 	
 
 	void setYPos();
-	int getYPos() const;
-	int getXPos() const;
+	int getYPos();
+	int getXPos();
 	void setXPos();
 	bool setIsHit();
 	bool getIsHit();
 	void setSpeed();
 	int getSpeed();
 	void move(char direction);	//check position within here with move counter
+	void Shoot(vector<EnemyProjectile> &enemyprojectiles);
 
 private:
 	int xPos;

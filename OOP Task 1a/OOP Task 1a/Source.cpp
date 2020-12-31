@@ -1,6 +1,6 @@
 #include "raylib.h"
 #include "Game.h"
-
+#include "RandomNumberGenerator.h"
 int main()
 {
     InitWindow(900, 600, "OOP Assignment 1");
@@ -10,8 +10,12 @@ int main()
     game.Setup();
     float timeDelayForEnemyMovement = 0;
     float timeDelayForPlayerProjectile = 0;
+    float timeDelayForEnemyProjectile = 0;
+    float timeDelayForEnemyShoot = 0;
     int directionCounter = 0;
     bool pause = false;
+    int randomNumber = 0;
+    
 
     while (!WindowShouldClose())
     {
@@ -33,6 +37,8 @@ int main()
             {
                 pause = true;
             }
+
+
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
@@ -73,6 +79,34 @@ int main()
                 
                 timeDelayForEnemyMovement = 0;
             }
+
+            timeDelayForEnemyMovement += GetFrameTime();
+            timeDelayForEnemyShoot += GetFrameTime();
+
+            if(timeDelayForEnemyShoot-1>=0)
+            {
+                randomNumber = GetRandomValue(0, game.enemies.size());
+
+                for (int i = 0; i < game.enemies.size(); i++)
+                {
+                    if (randomNumber == i)
+                    {
+                        game.enemies[i].Shoot(game.enemyprojectile);
+                    }
+                }
+                timeDelayForEnemyShoot = 0;
+            }
+            timeDelayForEnemyProjectile += GetFrameTime();
+
+            if (timeDelayForEnemyProjectile - 0.1 >= 0)
+            {
+                for (int i = 0; i < game.enemyprojectile.size(); i++)
+                {
+                    game.enemyprojectile[i].move();
+                }
+                timeDelayForEnemyProjectile = 0;
+            }
+
             timeDelayForPlayerProjectile += GetFrameTime();
             if (timeDelayForPlayerProjectile - 0.05 >= 0)
             {
@@ -112,6 +146,7 @@ int main()
                     case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
                     case ENEMY:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);       break;
                     case PLAYERPROJECTILE: DrawRectangle(xPosition, yPosition, cellSize, cellSize, WHITE); break;
+                    case ENEMYPROJECTILE: DrawRectangle(xPosition, yPosition, cellSize, cellSize, PINK); break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }
 

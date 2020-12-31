@@ -30,6 +30,8 @@ class Game
       bool IsWallAtPosition(int x, int y);
       bool IsEnemyAtPosition(int x, int y);
       bool IsProjectileAtPosition(int x, int y);
+      bool IsEnemyProjectileAtPosition(int x, int y);
+
       int getScore();
 
       void HandlePlayerProjectiles();

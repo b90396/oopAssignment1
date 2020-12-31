@@ -1,5 +1,7 @@
 #include "Enemy.h"
-
+#include <vector>
+#include "Game.h"
+#include "EnemyProjectile.h"
 Enemy::Enemy(int x, int y)
 {
 
@@ -13,12 +15,12 @@ void Enemy::setYPos()
 
 }
 
-int Enemy::getYPos() const
+int Enemy::getYPos()
 {
 	return yPos;
 }
 
-int Enemy::getXPos() const
+int Enemy::getXPos()
 {
 	return xPos;
 }
@@ -71,4 +73,9 @@ void Enemy::move(char direction)
 	{
 		yPos += 1;
 	}
+}
+
+void Enemy::Shoot(vector<EnemyProjectile> &enemyprojectile)
+{
+	enemyprojectile.push_back(EnemyProjectile(getXPos(), (getYPos() + 1), 1));
 }

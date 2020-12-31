@@ -9,6 +9,7 @@
 #define FLOOR     'F'
 #define ENEMY	  'E'
 #define PLAYERPROJECTILE 'R'
+#define ENEMYPROJECTILE 'O'
 
 // the command letters to move the mouse on the maze
 #define KEY_RIGHT 262
