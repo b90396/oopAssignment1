@@ -37,17 +37,17 @@ void Game::Setup()
     enemies.push_back(Enemy(7, 2));
     enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(11, 2));
+
 }
 
 void Game::ProcessInput(int key)
 {
     if (key == KEY_SPACE)
     {
-        player.Shoot();
+        player.Shoot(playerprojectiles);
     }
     else
     {
-        //Added to Process Input for testing but doesn't work properly
         player.Move(key);
     }
 
@@ -83,11 +83,16 @@ vector<vector<char>> Game::PrepareGrid()
             else if(IsEnemyAtPosition(col, row))                // create enemy.
             {
                 line.push_back(ENEMY);
-            }                                                   
+            }
+            else if (IsProjectileAtPosition(col, row))
+            {
+                line.push_back(PLAYERPROJECTILE);
+            }
             else
             {
                 line.push_back(FLOOR);
             }
+
         }
 
         // now that the row is full, add it to the 2D grid
@@ -122,6 +127,19 @@ bool Game::IsEnemyAtPosition(int x, int y)
 
         return false;
     }
+
+bool Game::IsProjectileAtPosition(int x, int y)
+{
+    for (size_t i = 0; i < playerprojectiles.size(); ++i)
+    {
+        if (playerprojectiles[i].getXPos() == x && playerprojectiles[i].getYPos() == y)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 bool Game::IsRunning()
 {

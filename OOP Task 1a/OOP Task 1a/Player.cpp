@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Game.h"
+#include "PlayerProjectile.h"
 
 Player::Player() : symbol(PLAYER), x(0), y(0), alive(true), escaped(false), dx(0), dy(0)
 {
@@ -45,10 +47,6 @@ void Player::Move(int key)
         dx = 0;
         dy = +1;
         break;
-    //case KEY_SPACE:
-    //    Shoot();
-    //    break;
-        //Detected but not registered properly and affects movement, No Idea Why
     default:
         // not a key we care about, so do nothing
         break;
@@ -73,9 +71,9 @@ void Player::PositionAtStartingPosition()
     y = SIZE;
 }
 
-void Player::Shoot()
+void Player::Shoot(vector<PlayerProjectile> &playerprojectiles)
 {
-    
+     playerprojectiles.push_back(PlayerProjectile(GetX(), (GetY() -1), 1));
 }
 
 int Player::getScore()

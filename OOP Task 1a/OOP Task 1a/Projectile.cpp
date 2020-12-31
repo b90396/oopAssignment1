@@ -15,12 +15,12 @@ Projectile::Projectile(int x, int y, float speed)
 }
 
 // Accessor methods.
-int Projectile::getXPos() const
+int Projectile::getXPos()
 {
 	return x;
 }
 
-int Projectile::getYPos() const
+int Projectile::getYPos()
 {
 	return y;
 }
@@ -70,7 +70,7 @@ void Projectile::setHasHitProjectile(bool value)
 
 void Projectile::updatePosition()
 {
-	// to-do.
+
 }
 
 void Projectile::hitBarrier()

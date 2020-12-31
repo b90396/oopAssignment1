@@ -1,6 +1,10 @@
 #pragma once
 
 #include "constants.h"
+#include "PlayerProjectile.h"
+#include <vector>
+
+using namespace std;
 
 class Player
 {
@@ -25,8 +29,7 @@ class Player
         void decreaseLives();
         char symbol;
         int  x, y;
-        void Shoot();
-        //Removed the x for testing purposes
+        void Shoot(vector<PlayerProjectile> &playerprojectiles);
 
     private:
         // data members
