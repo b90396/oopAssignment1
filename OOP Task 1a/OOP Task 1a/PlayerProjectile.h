@@ -6,6 +6,7 @@ public:
 
 	void setHasHitEnemy(bool HHE);
 	bool getHasHitEnemy();
+	void movePlayerProjectile();
 	using Projectile::Projectile;
 
 private:

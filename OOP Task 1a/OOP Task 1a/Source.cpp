@@ -9,6 +9,7 @@ int main()
     Game game;
     game.Setup();
     float timeDelayForEnemyMovement = 0;
+    float timeDelayForPlayerProjectile = 0;
     int directionCounter = 0;
     bool pause = false;
 
@@ -29,10 +30,10 @@ int main()
             {
                 pause = true;
             }
-
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
+                
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
                     if (directionCounter < 9)
@@ -53,6 +54,7 @@ int main()
 
                     
                     //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
+
                     
                 }
                 if (directionCounter == 18)
@@ -67,6 +69,15 @@ int main()
                 
                 
                 timeDelayForEnemyMovement = 0;
+            }
+            timeDelayForPlayerProjectile += GetFrameTime();
+            if (timeDelayForPlayerProjectile - 0.05 >= 0)
+            {
+                for (int i = 0; i < game.playerprojectiles.size(); i++)
+                {
+                    game.playerprojectiles[i].movePlayerProjectile();
+                }
+                timeDelayForPlayerProjectile = 0;
             }
         }
         else

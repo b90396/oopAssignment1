@@ -70,7 +70,7 @@ void Projectile::setHasHitProjectile(bool value)
 
 void Projectile::updatePosition()
 {
-	// to-do.
+
 }
 
 void Projectile::hitBarrier()
