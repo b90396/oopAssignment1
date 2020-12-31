@@ -91,7 +91,7 @@ int main()
                 {
                     if (randomNumber == i)
                     {
-                        game.enemies[i].Shoot(game.enemyprojectile);
+                        game.enemies[i].Shoot(game.enemyprojectiles);
                     }
                 }
                 timeDelayForEnemyShoot = 0;
@@ -100,9 +100,9 @@ int main()
 
             if (timeDelayForEnemyProjectile - 0.1 >= 0)
             {
-                for (int i = 0; i < game.enemyprojectile.size(); i++)
+                for (int i = 0; i < game.enemyprojectiles.size(); i++)
                 {
-                    game.enemyprojectile[i].move();
+                    game.enemyprojectiles[i].move();
                 }
                 timeDelayForEnemyProjectile = 0;
             }

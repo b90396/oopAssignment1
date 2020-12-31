@@ -146,9 +146,9 @@ bool Game::IsProjectileAtPosition(int x, int y)
 }
 bool Game::IsEnemyProjectileAtPosition(int x, int y)
 {
-    for (size_t i = 0; i < enemyprojectile.size(); ++i)
+    for (size_t i = 0; i < enemyprojectiles.size(); ++i)
     {
-        if (enemyprojectile[i].getXPos() == x && enemyprojectile[i].getYPos() == y)
+        if (enemyprojectiles[i].getXPos() == x && enemyprojectiles[i].getYPos() == y)
         {
             return true;
         }
