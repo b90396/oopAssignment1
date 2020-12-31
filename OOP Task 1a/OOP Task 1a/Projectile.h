@@ -15,8 +15,8 @@ public:
 	~Projectile() {};
 
 	// Accessor methods.
-	int getXPos() const;
-	int getYPos() const;
+	int getXPos();
+	int getYPos();
 	float getSpeed() const;
 	bool getHasHitBarrier() const;
 	bool getHasHitProjectile() const;

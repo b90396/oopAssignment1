@@ -1,6 +1,6 @@
 #pragma once
 #include "Projectile.h"
-class PlayerProjectile : Projectile
+class PlayerProjectile : public Projectile
 {
 public:
 
@@ -10,6 +10,5 @@ public:
 
 private:
 	bool hasHitEnemy;
-
 };
 

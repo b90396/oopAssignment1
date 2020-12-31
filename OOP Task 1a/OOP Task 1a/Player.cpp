@@ -73,7 +73,7 @@ void Player::PositionAtStartingPosition()
 
 void Player::Shoot(vector<PlayerProjectile> &playerprojectiles)
 {
-     playerprojectiles.push_back(PlayerProjectile(GetX(), 4, 1));
+     playerprojectiles.push_back(PlayerProjectile(GetX(), (GetY() -1), 1));
 }
 
 int Player::getScore()

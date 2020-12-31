@@ -32,7 +32,6 @@ class Player
         char symbol;
         int  x, y;
         void Shoot(vector<PlayerProjectile> &playerprojectiles);
-        //Removed the x for testing purposes
 
     private:
         // data members

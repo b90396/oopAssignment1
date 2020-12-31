@@ -84,10 +84,10 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(ENEMY);
             }
-            /*else if (IsProjectileAtPosition(col, row))
+            else if (IsProjectileAtPosition(col, row))
             {
                 line.push_back(PLAYERPROJECTILE);
-            }*/
+            }
             else
             {
                 line.push_back(FLOOR);
@@ -127,6 +127,19 @@ bool Game::IsEnemyAtPosition(int x, int y)
 
         return false;
     }
+
+bool Game::IsProjectileAtPosition(int x, int y)
+{
+    for (size_t i = 0; i < playerprojectiles.size(); ++i)
+    {
+        if (playerprojectiles[i].getXPos() == x && playerprojectiles[i].getYPos() == y)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 bool Game::IsRunning()
 {
