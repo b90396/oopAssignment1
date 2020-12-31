@@ -1,6 +1,6 @@
 #pragma once
 #include "Projectile.h"
-class EnemyProjectile : Projectile
+class EnemyProjectile : public Projectile
 {
 public:
 	void setHasHitPlayer();

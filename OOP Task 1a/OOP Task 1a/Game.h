@@ -20,7 +20,7 @@ class Game
       vector<Enemy> enemies;
       vector<Projectile> projectiles;
       vector<PlayerProjectile> playerprojectiles;
-      vector<EnemyProjectile> enemyprojectile;
+      vector<EnemyProjectile> enemyprojectiles;
 
 
       void Setup();

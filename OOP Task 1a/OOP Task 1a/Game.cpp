@@ -189,42 +189,43 @@ void Game::HandlePlayerProjectiles()
 
 void Game::HandleEnemyProjectiles()
 {
-    //for (int i = 0; i < enemyProjectiles.size(); i++)
-    //{
-    //    for (int j = 0; j < walls.size(); i++)
-    //    {
-    //         Enemy Projectile hits Player...
-    //        if ((enemyProjectiles[i].getXPos() == player.GetX()) && (enemyProjectiles[i].getYPos() == player.GetX()))
-    //        {
-    //            if (player.getLives() < 0)
-    //            {
-    //                 Player lost...
-    //            }
-    //            else
-    //            {
-    //                 Player lost a life...
-    //                player.decreaseLives();
-    //            }
-    //        }
+    
+    for (int i = 0; i < enemyprojectiles.size(); i++)
+    {
+        for (int j = 0; j < walls.size(); i++)
+        {
+             //Enemy Projectile hits Player...
+            if ((enemyprojectiles[i].getXPos() == player.GetX()) && (enemyprojectiles[i].getYPos() == player.GetX()))
+            {
+                if (player.getLives() < 0)
+                {
+                     //Player lost...
+                }
+                else
+               {
+                     //Player lost a life...
+                    player.decreaseLives();
+                }
+            }
 
-    //         Enemy Projectile hits Wall piece...
-    //        if ((enemyProjectiles[i].getXPos() == walls[j].GetX()) && (enemyProjectiles[i].getYPos() == walls[j].GetY()))
-    //        {
-    //             remove Projectile.
-    //            enemyProjectiles.erase(enemyProjectiles.begin() + i);
+             //Enemy Projectile hits Wall piece...
+            if ((enemyprojectiles[i].getXPos() == walls[j].GetX()) && (enemyprojectiles[i].getYPos() == walls[j].GetY()))
+            {
+                //remove Projectile.
+                enemyprojectiles.erase(enemyprojectiles.begin() + i);
 
-    //             remove Wall piece.
-    //            walls.erase(walls.begin() + j);
-    //        }
+                // remove Wall piece.
+                walls.erase(walls.begin() + j);
+            }
 
-    //         Enemy Projectile reaches end of screen...
-    //        if (enemyProjectiles[i].getYPos() > 600 )
-    //        {
-    //             remove Projectile.
-    //            enemyProjectiles.erase(enemyProjectiles.begin() + i); 
-    //        }
-    //    }
-    //}
+             //Enemy Projectile reaches end of screen...
+            if (enemyprojectiles[i].getYPos() > 600 )
+            {
+                 //remove Projectile.
+                enemyprojectiles.erase(enemyprojectiles.begin() + i); 
+            }
+        }
+    }
 }
 
 int Game::getScore()
