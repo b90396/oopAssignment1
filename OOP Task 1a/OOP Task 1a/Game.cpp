@@ -1,5 +1,8 @@
 #include "Game.h"
 
+#include <iostream>
+using namespace std;
+
 void Game::Setup()
 {
     // block one
@@ -83,7 +86,7 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(ENEMY);
             }
-            else if (IsProjectileAtPosition(col, row))
+            else if (IsProjectileAtPosition(col, row))          // create player projectile.
             {
                 line.push_back(PLAYERPROJECTILE);
             }
@@ -165,42 +168,28 @@ bool Game::IsRunning()
 
 void Game::HandlePlayerProjectiles()
 {
-    for (int i = 0; i < playerprojectiles.size(); i++)
+    for (int i = 0; i < enemies.size(); i++)
     {
-        for (int j = 0; j < enemies.size(); j++)
+        for (int j = 0; j < playerprojectiles.size(); j++)
         {
-            for (int k = 0; k < walls.size(); k++)
+            // Player Projectile hits an Enemy...
+            if ((playerprojectiles[j].getXPos() == enemies[i].getXPos()) && (playerprojectiles[j].getYPos() == enemies[i].getYPos()))
             {
-                // Player Projectile hits an Enemy...
-                if ((playerprojectiles[i].getXPos() == enemies[j].getXPos()) && (playerprojectiles[i].getYPos() == enemies[j].getXPos()))
-                {
-                    // remove Projectile.
-                    playerprojectiles.erase(playerprojectiles.begin() + i);
+                // remove Projectile.
+                playerprojectiles.erase(playerprojectiles.begin());
 
-                    // remove Enemy.
-                    enemies.erase(enemies.begin() + j);
-                }
+                // remove Enemy.
+                enemies.erase(enemies.begin() + i);
+                
 
-                // Player Projectile hits a Wall piece...
-                if ((playerprojectiles[i].getXPos() == walls[k].GetX()) && (playerprojectiles[i].getYPos() == walls[k].GetY()))
-                {
-                    // remove Projectile.
-                    playerprojectiles.erase(playerprojectiles.begin() + i);
-
-                    // remove Wall piece.
-                    walls.erase(walls.begin() + k);
-                }
-
-                // Player Projectile reaches end of screen...
-                if (playerprojectiles[i].getYPos() < 0)
-                {
-                    // remove Projectile.
-                    playerprojectiles.erase(playerprojectiles.begin() + i); 
-                }
+                cout << "Hit the enemy." << endl;
             }
+
         }
     }
 }
+
+
 
 void Game::HandleEnemyProjectiles()
 {

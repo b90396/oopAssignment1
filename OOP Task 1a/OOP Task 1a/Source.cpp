@@ -37,7 +37,8 @@ int main()
             {
                 pause = true;
             }
-
+          
+            game.HandlePlayerProjectiles();
 
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
