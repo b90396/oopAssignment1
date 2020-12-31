@@ -48,13 +48,12 @@ void Game::ProcessInput(int key)
     if (key == KEY_SPACE)
     {
         player.Shoot(playerprojectiles);
+        
     }
     else
     {
         player.Move(key);
     }
-
-
 }
 
 /// <summary>
@@ -91,10 +90,15 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(PLAYERPROJECTILE);
             }
+            else if(IsEnemyProjectileAtPosition(col,row))
+            {
+                line.push_back(ENEMYPROJECTILE);
+            }
             else
             {
                 line.push_back(FLOOR);
             }
+
 
         }
 
@@ -143,7 +147,18 @@ bool Game::IsProjectileAtPosition(int x, int y)
 
     return false;
 }
+bool Game::IsEnemyProjectileAtPosition(int x, int y)
+{
+    for (size_t i = 0; i < enemyprojectiles.size(); ++i)
+    {
+        if (enemyprojectiles[i].getXPos() == x && enemyprojectiles[i].getYPos() == y)
+        {
+            return true;
+        }
+    }
 
+    return false;
+}
 bool Game::IsRunning()
 {
     // depending on your game you'll need to modify this to return false
