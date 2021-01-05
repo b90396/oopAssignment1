@@ -9,7 +9,6 @@
 #include "Projectile.h"
 #include "PlayerProjectile.h"
 #include "EnemyProjectile.h"
-#include "FileHandler.h"
 
 using namespace std;
 
@@ -39,7 +38,7 @@ class Game
 
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();
-      void HandleProjectileToProjectileCollisions();
+
       void HandleEnemyToPlayerCollisions();
       void HandleEnemyToWallCollisions();
 };

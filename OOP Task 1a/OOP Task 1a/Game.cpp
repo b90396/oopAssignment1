@@ -33,14 +33,9 @@ void Game::Setup()
     walls.push_back(Wall(18, 16));
 
     //CREATE ENEMIES HERE
-
-    enemies.push_back(Enemy(1, 2));
-    enemies.push_back(Enemy(3, 2));
-    enemies.push_back(Enemy(5, 2));
-    enemies.push_back(Enemy(7, 2));
-    enemies.push_back(Enemy(9, 2));
-    enemies.push_back(Enemy(11, 2));
-
+    BuildEnemies();
+    player.setLives();
+    player.resetScore();
 }
 
 void Game::ProcessInput(int key)
@@ -100,14 +95,16 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(PLAYERPROJECTILE);
             }
-            else if(IsEnemyProjectileAtPosition(col,row))       // create enemy projectile.
+            else if(IsEnemyProjectileAtPosition(col,row))
             {
                 line.push_back(ENEMYPROJECTILE);
             }
             else
             {
-                line.push_back(FLOOR);                          
+                line.push_back(FLOOR);
             }
+
+
         }
           
         // now that the row is full, add it to the 2D grid
@@ -196,6 +193,7 @@ void Game::HandlePlayerToEnemyCollisions()
                 
                 cout << "Hit the enemy." << endl;
             }
+
         }
     }
 }
@@ -221,23 +219,6 @@ void Game::HandlePlayerToWallCollisions()
     }
 }
 
-void Game::HandleProjectileToProjectileCollisions()
-{
-    for (int i = 0; i < enemyprojectiles.size(); i++)
-    {
-        for (int j = 0; j < playerprojectiles.size(); j++)
-        {
-            // Enemy Projectile hits Player Projectile...
-            if ((enemyprojectiles[i].getXPos() == playerprojectiles[j].getXPos()) && (enemyprojectiles[i].getYPos() == playerprojectiles[j].getYPos()))
-            {
-                enemyprojectiles.erase(enemyprojectiles.begin() + i);
-
-                playerprojectiles.erase(playerprojectiles.begin() + j);
-            }
-        }
-    }
-}
-
 void Game::HandleEnemyToPlayerCollisions()
 {
     for (int i = 0; i < enemyprojectiles.size(); i++)
@@ -245,7 +226,9 @@ void Game::HandleEnemyToPlayerCollisions()
         // Enemy Projectile hits Player...
         if ((enemyprojectiles[i].getXPos() == player.GetX()) && (enemyprojectiles[i].getYPos() == player.GetY()))
         {
-            // Handle player lives stuff...
+            enemyprojectiles.erase(enemyprojectiles.begin() + i);
+            player.decreaseLives();
+            cout << "Player Hit";
         }
     }
 }
