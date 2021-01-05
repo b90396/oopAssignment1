@@ -17,6 +17,7 @@ int main()
     float timeDelayForEnemyShoot = 0;
     int directionCounter = 0;
     bool pause = false;
+    bool gameOver = false;
     int randomNumber = 0;
     
 
@@ -26,9 +27,10 @@ int main()
         ClearBackground(DARKGRAY);
 
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 30, 20, LIGHTGRAY);
+        DrawText(FormatText("LIVES: %i", game.getLives()), 610, 50, 20, LIGHTGRAY);
         
 
-        if (game.IsRunning() && !pause)
+        if (game.IsRunning() && !pause && !gameOver)
         {
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
@@ -41,37 +43,32 @@ int main()
                 pause = true;
             }
           
-
             HandleCollisionDetection(game);
-            
+
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
                 
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
-                    if (directionCounter < 9)
+                    if (directionCounter < 3)
                     {
                         game.enemies[i].move('R');
                     }
                     
-                    if (directionCounter >= 9 && directionCounter < 18)
+                    if (directionCounter >= 3 && directionCounter < 6)
                     {
                         game.enemies[i].move('L');
                     }
                     
-                    if (directionCounter == 18)
+                    if (directionCounter == 6)
                     {
                         game.enemies[i].move('D');
-                        
                     }
 
-                    
                     //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
-
-                    
                 }
-                if (directionCounter == 18)
+                if (directionCounter == 6)
                 {
                     directionCounter = 0;
 
@@ -121,6 +118,25 @@ int main()
                 }
                 timeDelayForPlayerProjectile = 0;
             }
+
+            if (game.IsPlayerDead() == true)
+            {
+                gameOver = true;
+            }
+            
+        }
+        else if(gameOver)
+        {
+        DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
+
+        if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
+        {
+            gameOver = false;
+
+            game = Game();
+            game.Setup();
+
+        }
         }
         else
         {
@@ -133,6 +149,7 @@ int main()
 
         }
 
+        
         const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
 
         const auto grid = game.PrepareGrid();

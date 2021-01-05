@@ -23,6 +23,7 @@ class Game
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
 
+      void BuildEnemies();
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
@@ -31,8 +32,10 @@ class Game
       bool IsEnemyAtPosition(int x, int y);
       bool IsProjectileAtPosition(int x, int y);
       bool IsEnemyProjectileAtPosition(int x, int y);
+      bool IsPlayerDead();
 
       int getScore();
+      int getLives();
 
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();

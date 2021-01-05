@@ -40,6 +40,7 @@ void Game::Setup()
     enemies.push_back(Enemy(7, 2));
     enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(11, 2));
+
 }
 
 void Game::ProcessInput(int key)
@@ -47,7 +48,6 @@ void Game::ProcessInput(int key)
     if (key == KEY_SPACE)
     {
         player.Shoot(playerprojectiles);
-        
     }
     else
     {
@@ -55,6 +55,17 @@ void Game::ProcessInput(int key)
     }
 }
 
+
+void Game::BuildEnemies()
+{
+    for (int i = 1; i <= 17; i+= 2)
+    {
+        for (int j = 2; j <= 6; j += 2)
+        {
+            enemies.push_back(Enemy(i, j));
+        }
+    }
+}
 /// <summary>
 /// This function builds up a 2D grid of characters representing the current state of the game.
 /// The characters are later used to decide which colour sqaure to display, but you could display images instead.
@@ -98,7 +109,7 @@ vector<vector<char>> Game::PrepareGrid()
                 line.push_back(FLOOR);                          
             }
         }
-
+          
         // now that the row is full, add it to the 2D grid
         grid.push_back(line);
     }
@@ -178,6 +189,8 @@ void Game::HandlePlayerToEnemyCollisions()
                 // remove Projectile.
                 playerprojectiles.erase(playerprojectiles.begin() + j);
 
+                player.incrementScore();
+
                 // remove Enemy.
                 enemies.erase(enemies.begin() + i);
                 
@@ -233,9 +246,6 @@ void Game::HandleEnemyToPlayerCollisions()
         if ((enemyprojectiles[i].getXPos() == player.GetX()) && (enemyprojectiles[i].getYPos() == player.GetY()))
         {
             // Handle player lives stuff...
-            cout << "Enemy Hit Player" << endl;
-
-            enemyprojectiles.erase(enemyprojectiles.begin() + i);
         }
     }
 }
@@ -262,4 +272,21 @@ void Game::HandleEnemyToWallCollisions()
 int Game::getScore()
 {
     return player.getScore();
+}
+
+int Game::getLives()
+{
+    return player.getLives();
+}
+
+bool Game::IsPlayerDead()
+{
+    if (player.getLives() <= 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
