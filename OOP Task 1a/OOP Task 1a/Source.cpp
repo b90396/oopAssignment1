@@ -38,7 +38,10 @@ int main()
                 pause = true;
             }
           
-            game.HandlePlayerProjectiles();
+            game.HandlePlayerToEnemyCollisions();
+            game.HandlePlayerToWallCollisions();
+            game.HandleEnemyToWallCollisions();
+            
 
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)

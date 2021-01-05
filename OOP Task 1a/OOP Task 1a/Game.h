@@ -34,6 +34,9 @@ class Game
 
       int getScore();
 
-      void HandlePlayerProjectiles();
-      void HandleEnemyProjectiles();
+      void HandlePlayerToEnemyCollisions();
+      void HandlePlayerToWallCollisions();
+
+      void HandleEnemyToPlayerCollisions();
+      void HandleEnemyToWallCollisions();
 };
