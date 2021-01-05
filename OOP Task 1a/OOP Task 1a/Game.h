@@ -33,6 +33,7 @@ class Game
       bool IsEnemyProjectileAtPosition(int x, int y);
 
       int getScore();
+      int getLives();
 
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();

@@ -41,6 +41,7 @@ void Game::Setup()
     enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(11, 2));
 
+    player.setLives();
 }
 
 void Game::ProcessInput(int key)
@@ -221,7 +222,9 @@ void Game::HandleEnemyToPlayerCollisions()
         // Enemy Projectile hits Player...
         if ((enemyprojectiles[i].getXPos() == player.GetX()) && (enemyprojectiles[i].getYPos() == player.GetY()))
         {
-            // Handle player lives stuff...
+            enemyprojectiles.erase(enemyprojectiles.begin() + i);
+            player.decreaseLives();
+            cout << "Player Hit";
         }
     }
 }
@@ -248,4 +251,9 @@ void Game::HandleEnemyToWallCollisions()
 int Game::getScore()
 {
     return player.getScore();
+}
+
+int Game::getLives()
+{
+    return player.getLives();
 }
