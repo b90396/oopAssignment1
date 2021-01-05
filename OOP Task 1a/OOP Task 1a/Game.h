@@ -22,7 +22,7 @@ class Game
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
 
-
+      void BuildEnemies();
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
