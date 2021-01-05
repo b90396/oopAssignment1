@@ -24,7 +24,7 @@ int main()
         ClearBackground(DARKGRAY);
 
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 30, 20, LIGHTGRAY);
-        DrawText(FormatText("LIVES: %i", game.getLives()), 610, 50, 20, LIGHTGRAY);
+        DrawText(FormatText("LIVES: %i", game.getLives()), 610, 60, 20, LIGHTGRAY);
         
 
         if (game.IsRunning() && !pause && !gameOver)
@@ -39,12 +39,12 @@ int main()
             {
                 pause = true;
             }
-          
+            
             game.HandlePlayerToEnemyCollisions();
             game.HandlePlayerToWallCollisions();
             game.HandleEnemyToWallCollisions();
             game.HandleEnemyToPlayerCollisions();
-            
+            game.HandleEnemyCollisionWithWall();
 
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)

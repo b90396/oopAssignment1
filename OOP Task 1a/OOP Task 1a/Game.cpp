@@ -173,7 +173,19 @@ bool Game::IsRunning()
 
 // to-do
 // remove projectiles that reach end of screen.
-
+void Game::HandleEnemyCollisionWithWall()
+{
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        for (int j = 0; j < walls.size(); j++)
+        {
+            if ((enemies[i].getXPos() == walls[j].GetX()) && (enemies[i].getYPos() == walls[j].GetY()))
+            {
+                walls.erase(walls.begin() + j);
+            }
+        }
+    }
+}
 void Game::HandlePlayerToEnemyCollisions()
 {
     for (int i = 0; i < enemies.size(); i++)
