@@ -34,7 +34,6 @@ void Game::Setup()
 
     //CREATE ENEMIES HERE
     BuildEnemies();
-
     player.setLives();
     player.resetScore();
 }
@@ -44,7 +43,6 @@ void Game::ProcessInput(int key)
     if (key == KEY_SPACE)
     {
         player.Shoot(playerprojectiles);
-        
     }
     else
     {
