@@ -42,6 +42,7 @@ void Game::Setup()
     enemies.push_back(Enemy(11, 2));
 
     player.setLives();
+    player.resetScore();
 }
 
 void Game::ProcessInput(int key)
