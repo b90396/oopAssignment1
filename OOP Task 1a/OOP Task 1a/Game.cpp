@@ -33,13 +33,7 @@ void Game::Setup()
     walls.push_back(Wall(18, 16));
 
     //CREATE ENEMIES HERE
-
-    enemies.push_back(Enemy(1, 2));
-    enemies.push_back(Enemy(3, 2));
-    enemies.push_back(Enemy(5, 2));
-    enemies.push_back(Enemy(7, 2));
-    enemies.push_back(Enemy(9, 2));
-    enemies.push_back(Enemy(11, 2));
+    BuildEnemies();
 
     player.setLives();
     player.resetScore();
@@ -58,6 +52,17 @@ void Game::ProcessInput(int key)
     }
 }
 
+
+void Game::BuildEnemies()
+{
+    for (int i = 1; i <= 17; i+= 2)
+    {
+        for (int j = 2; j <= 6; j += 2)
+        {
+            enemies.push_back(Enemy(i, j));
+        }
+    }
+}
 /// <summary>
 /// This function builds up a 2D grid of characters representing the current state of the game.
 /// The characters are later used to decide which colour sqaure to display, but you could display images instead.
@@ -103,7 +108,7 @@ vector<vector<char>> Game::PrepareGrid()
 
 
         }
-
+          
         // now that the row is full, add it to the 2D grid
         grid.push_back(line);
     }
