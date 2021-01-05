@@ -181,6 +181,8 @@ void Game::HandlePlayerToEnemyCollisions()
                 // remove Projectile.
                 playerprojectiles.erase(playerprojectiles.begin() + j);
 
+                player.incrementScore();
+
                 // remove Enemy.
                 enemies.erase(enemies.begin() + i);
                 
