@@ -34,9 +34,13 @@ class Game
 
       int getScore();
 
+      string ReadFromFile(string dir);
+      void WriteToFile(string fileName, string content);
+
+
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();
-
+      void HandleProjectileToProjectileCollisions();
       void HandleEnemyToPlayerCollisions();
       void HandleEnemyToWallCollisions();
 };

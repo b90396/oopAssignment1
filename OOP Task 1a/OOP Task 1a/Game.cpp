@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 void Game::Setup()
@@ -40,7 +41,6 @@ void Game::Setup()
     enemies.push_back(Enemy(7, 2));
     enemies.push_back(Enemy(9, 2));
     enemies.push_back(Enemy(11, 2));
-
 }
 
 void Game::ProcessInput(int key)
@@ -90,16 +90,14 @@ vector<vector<char>> Game::PrepareGrid()
             {
                 line.push_back(PLAYERPROJECTILE);
             }
-            else if(IsEnemyProjectileAtPosition(col,row))
+            else if(IsEnemyProjectileAtPosition(col,row))       // create enemy projectile.
             {
                 line.push_back(ENEMYPROJECTILE);
             }
             else
             {
-                line.push_back(FLOOR);
+                line.push_back(FLOOR);                          
             }
-
-
         }
 
         // now that the row is full, add it to the 2D grid
@@ -166,6 +164,42 @@ bool Game::IsRunning()
     return true;
 }
 
+string Game::ReadFromFile(string fileName)
+{
+    string line;
+    string content;
+    ifstream file(fileName);
+    
+    if (file.is_open())
+    {
+        while (getline(file, line))
+        {
+            content += line;
+        }
+
+        file.close();
+    }
+
+    cout << "Unable to read from file." << endl;
+
+    return content;
+}
+
+void Game::WriteToFile(string fileName, string content)
+{
+    ofstream file(fileName);
+
+    if (file.is_open())
+    {
+        file << content << endl;
+        file.close();
+    }
+    else
+    {
+        cout << "Unable to open file." << endl;
+    }
+}
+
 // to-do
 // remove projectiles that reach end of screen.
 
@@ -186,7 +220,6 @@ void Game::HandlePlayerToEnemyCollisions()
                 
                 cout << "Hit the enemy." << endl;
             }
-
         }
     }
 }
@@ -212,6 +245,23 @@ void Game::HandlePlayerToWallCollisions()
     }
 }
 
+void Game::HandleProjectileToProjectileCollisions()
+{
+    for (int i = 0; i < enemyprojectiles.size(); i++)
+    {
+        for (int j = 0; j < playerprojectiles.size(); j++)
+        {
+            // Enemy Projectile hits Player Projectile...
+            if ((enemyprojectiles[i].getXPos() == playerprojectiles[j].getXPos()) && (enemyprojectiles[i].getYPos() == playerprojectiles[j].getYPos()))
+            {
+                enemyprojectiles.erase(enemyprojectiles.begin() + i);
+
+                playerprojectiles.erase(playerprojectiles.begin() + j);
+            }
+        }
+    }
+}
+
 void Game::HandleEnemyToPlayerCollisions()
 {
     for (int i = 0; i < enemyprojectiles.size(); i++)
@@ -220,6 +270,9 @@ void Game::HandleEnemyToPlayerCollisions()
         if ((enemyprojectiles[i].getXPos() == player.GetX()) && (enemyprojectiles[i].getYPos() == player.GetY()))
         {
             // Handle player lives stuff...
+            cout << "Enemy Hit Player" << endl;
+
+            enemyprojectiles.erase(enemyprojectiles.begin() + i);
         }
     }
 }

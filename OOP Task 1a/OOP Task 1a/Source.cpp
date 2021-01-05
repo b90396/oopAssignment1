@@ -1,6 +1,9 @@
 #include "raylib.h"
 #include "Game.h"
 #include "RandomNumberGenerator.h"
+
+void HandleCollisionDetection(Game& game);
+
 int main()
 {
     InitWindow(900, 600, "OOP Assignment 1");
@@ -38,11 +41,9 @@ int main()
                 pause = true;
             }
           
-            game.HandlePlayerToEnemyCollisions();
-            game.HandlePlayerToWallCollisions();
-            game.HandleEnemyToWallCollisions();
-            
 
+            HandleCollisionDetection(game);
+            
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
@@ -164,4 +165,13 @@ int main()
 
     CloseWindow();
     return 0;
+}
+
+void HandleCollisionDetection(Game& game)
+{
+    game.HandlePlayerToEnemyCollisions();
+    game.HandlePlayerToWallCollisions();
+    game.HandleEnemyToWallCollisions();
+    game.HandleEnemyToPlayerCollisions();
+    game.HandleProjectileToProjectileCollisions();
 }
