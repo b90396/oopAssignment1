@@ -14,6 +14,7 @@ int main()
     float timeDelayForEnemyShoot = 0;
     int directionCounter = 0;
     bool pause = false;
+    bool gameOver = false;
     int randomNumber = 0;
     
 
@@ -26,7 +27,7 @@ int main()
         DrawText(FormatText("LIVES: %i", game.getLives()), 610, 50, 20, LIGHTGRAY);
         
 
-        if (game.IsRunning() && !pause)
+        if (game.IsRunning() && !pause && !gameOver)
         {
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
@@ -122,6 +123,25 @@ int main()
                 }
                 timeDelayForPlayerProjectile = 0;
             }
+
+            if (game.IsPlayerDead() == true)
+            {
+                gameOver = true;
+            }
+            
+        }
+        else if(gameOver)
+        {
+        DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
+
+        if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
+        {
+            gameOver = false;
+
+            game = Game();
+            game.Setup();
+
+        }
         }
         else
         {
@@ -134,6 +154,7 @@ int main()
 
         }
 
+        
         const int cellSize = (int)((float)GetScreenHeight() / (float)(SIZE));
 
         const auto grid = game.PrepareGrid();

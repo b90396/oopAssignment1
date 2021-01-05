@@ -258,3 +258,15 @@ int Game::getLives()
 {
     return player.getLives();
 }
+
+bool Game::IsPlayerDead()
+{
+    if (player.getLives() <= 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
