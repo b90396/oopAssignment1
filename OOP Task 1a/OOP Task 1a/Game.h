@@ -32,13 +32,13 @@ class Game
       bool IsProjectileAtPosition(int x, int y);
       bool IsEnemyProjectileAtPosition(int x, int y);
       bool IsPlayerDead();
-
+      
       int getScore();
       int getLives();
 
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();
-
+      void HandleEnemyCollisionWithWall();
       void HandleEnemyToPlayerCollisions();
       void HandleEnemyToWallCollisions();
 };
