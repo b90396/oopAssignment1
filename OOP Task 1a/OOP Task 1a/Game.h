@@ -9,6 +9,7 @@
 #include "Projectile.h"
 #include "PlayerProjectile.h"
 #include "EnemyProjectile.h"
+#include "FileHandler.h"
 
 using namespace std;
 
@@ -22,7 +23,6 @@ class Game
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
 
-
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
@@ -33,10 +33,6 @@ class Game
       bool IsEnemyProjectileAtPosition(int x, int y);
 
       int getScore();
-
-      string ReadFromFile(string dir);
-      void WriteToFile(string fileName, string content);
-
 
       void HandlePlayerToEnemyCollisions();
       void HandlePlayerToWallCollisions();

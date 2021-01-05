@@ -1,7 +1,6 @@
 #include "Game.h"
 
 #include <iostream>
-#include <fstream>
 using namespace std;
 
 void Game::Setup()
@@ -162,42 +161,6 @@ bool Game::IsRunning()
     // depending on your game you'll need to modify this to return false
     // maybe it's when the player runs out of moves, maybe it's when they get caught, it's up to you!
     return true;
-}
-
-string Game::ReadFromFile(string fileName)
-{
-    string line;
-    string content;
-    ifstream file(fileName);
-    
-    if (file.is_open())
-    {
-        while (getline(file, line))
-        {
-            content += line;
-        }
-
-        file.close();
-    }
-
-    cout << "Unable to read from file." << endl;
-
-    return content;
-}
-
-void Game::WriteToFile(string fileName, string content)
-{
-    ofstream file(fileName);
-
-    if (file.is_open())
-    {
-        file << content << endl;
-        file.close();
-    }
-    else
-    {
-        cout << "Unable to open file." << endl;
-    }
 }
 
 // to-do
