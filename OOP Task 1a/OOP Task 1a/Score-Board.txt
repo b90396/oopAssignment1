@@ -1,0 +1,3 @@
+Joshua	100
+Tom	50
+Ollie	25

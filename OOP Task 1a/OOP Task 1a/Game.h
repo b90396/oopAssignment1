@@ -9,6 +9,7 @@
 #include "Projectile.h"
 #include "PlayerProjectile.h"
 #include "EnemyProjectile.h"
+#include "FileHandler.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ class Game
       vector<Projectile> projectiles;
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
+      FileHandler fh;
 
       void BuildEnemies();
       void Setup();
@@ -41,9 +43,10 @@ class Game
       int getScore();
       int getLives();
 
-      void HandlePlayerToEnemyCollisions();
-      void HandlePlayerToWallCollisions();
-      void HandleEnemyCollisionWithWall();
-      void HandleEnemyToPlayerCollisions();
-      void HandleEnemyToWallCollisions();
+      void HandlePlayerProjectileToEnemyCollisions();
+      void HandlePlayerProjectileToWallCollisions();
+      void HandleEnemyMovementToWallCollisions();
+      void HandleProjectileToProjectileCollisions();
+      void HandleEnemyProjectileToPlayerCollisions();
+      void HandleEnemyProjectileToWallCollisions();
 };
