@@ -15,6 +15,7 @@ int main()
     int directionCounter = 0;
     bool pause = false;
     bool gameOver = false;
+    bool resetgame = false;
     int randomNumber = 0;
     
 
@@ -124,7 +125,10 @@ int main()
             {
                 gameOver = true;
             }
-            
+            if (game.enemies.empty() == true)
+            {
+                game.BuildEnvironment();
+            }
         }
         else if(gameOver)
         {
