@@ -9,13 +9,6 @@ void Game::Setup()
     BuildEnvironment();
     player.setLives();
     player.resetScore();
-
-    // debug.
-    fh.WriteToFile("Score-Board.txt", "Joshua\t100\nTom\t50\nOllie\t25");
-
-    // debug.
-    cout << fh.ReadFromFile("Score-Board.txt") << endl;
-    
 }
 
 void Game::BuildEnvironment()
@@ -195,7 +188,22 @@ bool Game::IsRunning()
     return true;
 }
 
-void Game::HandlePlayerProjectileToEnemyCollisions()
+// to-do
+// remove projectiles that reach end of screen.
+void Game::HandleEnemyCollisionWithWall()
+{
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        for (int j = 0; j < walls.size(); j++)
+        {
+            if ((enemies[i].getXPos() == walls[j].GetX()) && (enemies[i].getYPos() == walls[j].GetY()))
+            {
+                walls.erase(walls.begin() + j);
+            }
+        }
+    }
+}
+void Game::HandlePlayerToEnemyCollisions()
 {
     for (int i = 0; i < enemies.size(); i++)
     {
@@ -211,14 +219,15 @@ void Game::HandlePlayerProjectileToEnemyCollisions()
 
                 // remove Enemy.
                 enemies.erase(enemies.begin() + i);
-
+                
                 cout << "Hit the enemy." << endl;
             }
+
         }
     }
 }
 
-void Game::HandlePlayerProjectileToWallCollisions()
+void Game::HandlePlayerToWallCollisions()
 {
     for (int i = 0; i < walls.size(); i++)
     {
@@ -239,40 +248,7 @@ void Game::HandlePlayerProjectileToWallCollisions()
     }
 }
 
-void Game::HandleEnemyMovementToWallCollisions()
-{
-    for (int i = 0; i < enemies.size(); i++)
-    {
-        for (int j = 0; j < walls.size(); j++)
-        {
-            // if enemy moves into wall x/y.
-            if ((enemies[i].getXPos() == walls[j].GetX()) && (enemies[i].getYPos() == walls[j].GetY()))
-            {
-                // delete wall.
-                walls.erase(walls.begin() + j);
-            }
-        }
-    }
-}
-
-void Game::HandleProjectileToProjectileCollisions()
-{
-    for (int i = 0; i < enemyprojectiles.size(); i++)
-    {
-        for (int j = 0; j < playerprojectiles.size(); j++)
-        {
-            // if Projectile hits Projectile...
-            if ((enemyprojectiles[i].getXPos() == playerprojectiles[j].getXPos()) && (enemyprojectiles[i].getYPos() == playerprojectiles[j].getYPos()))
-            {
-                enemyprojectiles.erase(enemyprojectiles.begin() + i);
-
-                playerprojectiles.erase(playerprojectiles.begin() + j);
-            }
-        }
-    }
-}
-
-void Game::HandleEnemyProjectileToPlayerCollisions()
+void Game::HandleEnemyToPlayerCollisions()
 {
     for (int i = 0; i < enemyprojectiles.size(); i++)
     {
@@ -286,7 +262,7 @@ void Game::HandleEnemyProjectileToPlayerCollisions()
     }
 }
 
-void Game::HandleEnemyProjectileToWallCollisions()
+void Game::HandleEnemyToWallCollisions()
 {
     for (int i = 0; i < walls.size(); i++)
     {
