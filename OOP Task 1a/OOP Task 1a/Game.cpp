@@ -5,38 +5,55 @@ using namespace std;
 
 void Game::Setup()
 {
-    // block one
-    walls.push_back(Wall(2, 17));
-    walls.push_back(Wall(3, 17));
-    walls.push_back(Wall(4, 17));
-    walls.push_back(Wall(5, 17));
-
-    walls.push_back(Wall(3, 16));
-    walls.push_back(Wall(4, 16));
-
-    // block two
-    walls.push_back(Wall(9, 17));
-    walls.push_back(Wall(10, 17));
-    walls.push_back(Wall(11, 17));
-    walls.push_back(Wall(12, 17));
-
-    walls.push_back(Wall(10, 16));
-    walls.push_back(Wall(11, 16));
-
-    // block three
-    walls.push_back(Wall(16, 17));
-    walls.push_back(Wall(17, 17));
-    walls.push_back(Wall(18, 17));
-    walls.push_back(Wall(19, 17));
-
-    walls.push_back(Wall(17, 16));
-    walls.push_back(Wall(18, 16));
-
     //CREATE ENEMIES HERE
-    BuildEnemies();
+    BuildEnvironment();
     player.setLives();
     player.resetScore();
 }
+
+void Game::BuildEnvironment()
+{
+    BuildEnemies();
+    BuildWall1();
+    BuildWall2();
+    BuildWall3();
+}
+void Game::BuildWall1()
+{
+    for (int i = 2; i <= 5; i++)
+    {
+        walls.push_back(Wall(i, 17));
+    }
+    for (int i = 3; i <= 4; i++)
+    {
+        walls.push_back(Wall(i, 16));
+    }
+}
+
+void Game::BuildWall2()
+{
+    for (int i = 9; i <= 12; i++)
+    {
+        walls.push_back(Wall(i, 17));
+    }
+    for (int i = 10; i <= 11; i++)
+    {
+        walls.push_back(Wall(i, 16));
+    }
+}
+
+void Game::BuildWall3()
+{
+    for (int i = 16; i <= 19; i++)
+    {
+        walls.push_back(Wall(i, 17));
+    }
+    for (int i = 17; i <= 18; i++)
+    {
+        walls.push_back(Wall(i, 16));
+    }
+}
+
 
 void Game::ProcessInput(int key)
 {
@@ -283,5 +300,13 @@ bool Game::IsPlayerDead()
     else
     {
         return false;
+    }
+}
+
+bool Game::RestartGame()
+{
+    if (enemies.size() == 0)
+    {
+        return true;
     }
 }

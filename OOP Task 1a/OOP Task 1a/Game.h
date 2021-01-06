@@ -26,6 +26,11 @@ class Game
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
+      void BuildEnvironment();
+      void BuildWall1();
+      void BuildWall2();
+      void BuildWall3();
+      bool RestartGame();
       bool IsRunning();
       bool IsWallAtPosition(int x, int y);
       bool IsEnemyAtPosition(int x, int y);
