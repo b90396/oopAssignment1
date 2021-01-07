@@ -41,9 +41,10 @@ class Game
       int getScore();
       int getLives();
 
-      void HandlePlayerToEnemyCollisions();
-      void HandlePlayerToWallCollisions();
-      void HandleEnemyCollisionWithWall();
-      void HandleEnemyToPlayerCollisions();
-      void HandleEnemyToWallCollisions();
+      void HandlePlayerProjectileToEnemyCollisions();
+      void HandlePlayerProjectileToWallCollisions();
+      void HandleEnemyMovementToWallCollisions();
+      void HandleProjectileToProjectileCollisions();
+      void HandleEnemyProjectileToPlayerCollisions();
+      void HandleEnemyProjectileToWallCollisions();
 };
