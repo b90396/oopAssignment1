@@ -11,11 +11,9 @@ void Game::Setup()
     player.resetScore();
 
     // debug.
-    fh.WriteToFile("Score-Board.txt", "Joshua\t100\nTom\t50\nOllie\t25");
-
+    //fh.WriteToFile("Score-Board.txt", "Joshua\t100\nTom\t50\nOllie\t25");
     // debug.
-    cout << fh.ReadFromFile("Score-Board.txt") << endl;
-    
+    //cout << fh.ReadFromFile("Score-Board.txt") << endl;
 }
 
 void Game::BuildEnvironment()

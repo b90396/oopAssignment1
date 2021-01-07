@@ -9,7 +9,7 @@
 #include "Projectile.h"
 #include "PlayerProjectile.h"
 #include "EnemyProjectile.h"
-#include "FileHandler.h"
+//#include "FileHandler.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ class Game
       vector<Projectile> projectiles;
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
-      FileHandler fh;
+      //FileHandler fh;
 
       void BuildEnemies();
       void Setup();

@@ -1,12 +1,9 @@
 #include "FileHandler.h"
 
-
-
 FileHandler::FileHandler() : contentBuffer(" ") {}
 
 FileHandler::~FileHandler() {}
 
-// useful for writing a chunk of content to a file.
 void FileHandler::WriteToFile(string fileName, string content)
 {
 	// open file.
