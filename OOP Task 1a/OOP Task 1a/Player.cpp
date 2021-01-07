@@ -88,7 +88,7 @@ void Player::resetScore()
 
 void Player::incrementScore()
 {
-    score++;
+    score += 100;
 }
 
 int Player::getLives()
