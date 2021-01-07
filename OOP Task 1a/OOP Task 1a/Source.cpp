@@ -5,7 +5,13 @@ int main()
 {
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
+    InitAudioDevice(); // Initialize audio device
+    Music music = LoadMusicStream("resources/audio/thememusic.mp3");
+    Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
+    goMusic.loopCount = 1;
 
+    music.loopCount = 0;
+    PlayMusicStream(music);
     Game game;
     game.Setup();
     float timeDelayForEnemyMovement = 0;
@@ -19,15 +25,38 @@ int main()
     bool resetgame = false;
     int randomNumber = 0;
     
+    int volumeCount = 1;
+    int gameStart = 0;
+    int highScores[4];
+
+
+    //Load images
+    Texture2D texture = LoadTexture("resources/playerShip.png");
+    Texture2D wall = LoadTexture("resources/brickwall2.png");
+    Texture2D alien = LoadTexture("resources/alien2.png");
+    Texture2D pProj = LoadTexture("resources/pBullet.png");
+    Texture2D eProj = LoadTexture("resources/eBullet.png");
+    Texture2D title = LoadTexture("resources/spaceInvadersTitle.png");
+    Texture2D hScores = LoadTexture("resources/highScoresTable.png");
+
+    int screenWidth = 800;
+    int screenHeight = 800;
+    title.width = 300;
+    title.height = 168;
+    hScores.width = 350;
+    hScores.height =350;
 
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        ClearBackground(DARKGRAY);
-
-        DrawText(FormatText("SCORE: %i", game.getScore()), 610, 30, 20, LIGHTGRAY);
-        DrawText(FormatText("LIVES: %i", game.getLives()), 610, 60, 20, LIGHTGRAY);
         
+        UpdateMusicStream(music);
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawTexture(title, 610, 10, YELLOW);
+        DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
+        DrawText(FormatText("LIVES: %i", game.getLives()), 740,180, 20, LIGHTGRAY);
+        DrawTexture(hScores, 575, 220,WHITE);
+        DrawText("PAUSE(P) MUTE(M)  EXIT(ESC)", 604, 570, 19, LIGHTGRAY);
 
         if (game.IsRunning() && !pause && !gameOver)
         {
@@ -46,7 +75,19 @@ int main()
             {
                 pause = true;
             }
-            
+            if (IsKeyPressed(KEY_M))
+            {
+                 volumeCount ++;
+                 if (volumeCount % 2 == 0) 
+                 {
+                    SetMusicVolume(music, 0.0f);
+                     SetMusicVolume(goMusic, 0.0f);
+                  }
+            else {
+                SetMusicVolume(music, 1.0f);
+                SetMusicVolume(goMusic, 1.0f);
+            }
+        }
             game.HandlePlayerToEnemyCollisions();
             game.HandlePlayerToWallCollisions();
             game.HandleEnemyToWallCollisions();
@@ -139,12 +180,18 @@ int main()
         }
         else if(gameOver)
         {
-        DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
-
+             DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
+             StopMusicStream(music);
+             SetMusicVolume(goMusic, 2.0f);
+             PlayMusicStream(goMusic);
+             UpdateMusicStream(goMusic);
+            
         if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
         {
             gameOver = false;
-
+            PauseMusicStream(goMusic);
+            PlayMusicStream(music);
+            UpdateMusicStream(music);
             game = Game();
             game.Setup();
 
@@ -172,20 +219,31 @@ int main()
             {
                 int xPosition = x * cellSize;
                 int yPosition = y * cellSize;
+            
+                texture.height = 30;
+                texture.width = 30;
+                wall.height = 30;
+                wall.width = 30;
+                alien.height = 30;
+                alien.width = 30;
+                pProj.height = 30;
+                pProj.width = 30;
+                eProj.height = 30;
+                eProj.width = 30;
 
                 switch (grid[y][x])
                 {
-                    case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, DARKGREEN); break;
-                    case WALL:   DrawRectangle(xPosition, yPosition, cellSize, cellSize, LIGHTGRAY); break;
-                    case PLAYER: DrawRectangle(xPosition, yPosition, cellSize, cellSize, GREEN);     break;
-                    case ENEMY:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, RED);       break;
-                    case PLAYERPROJECTILE: DrawRectangle(xPosition, yPosition, cellSize, cellSize, WHITE); break;
-                    case ENEMYPROJECTILE: DrawRectangle(xPosition, yPosition, cellSize, cellSize, PINK); break;
+                    case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
+                    case WALL: DrawTexture(wall, xPosition, yPosition, WHITE);    break; // DrawRectangle(xPosition, yPosition, cellSize, cellSize, LIGHTGRAY); break;
+                    case PLAYER: DrawTexture(texture, xPosition, yPosition, WHITE);    break;
+                    case ENEMY:  DrawTexture(alien, xPosition, yPosition, WHITE);    break;      break;
+                    case PLAYERPROJECTILE: DrawTexture(pProj, xPosition, yPosition, WHITE);  break;
+                    case ENEMYPROJECTILE: DrawTexture(eProj, xPosition, yPosition, WHITE);  break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }
 
                 // draw lines around each tile, remove this if you don't like it!
-                DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
+                //DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
             }
         }
 
