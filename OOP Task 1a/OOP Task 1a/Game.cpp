@@ -323,6 +323,13 @@ int Game::getLives()
     return player.getLives();
 }
 
+bool Game::EnemiesAtEnd()
+{
+    for (int i = 0; i < enemies.size(); i++)
+    {
+
+    }
+}
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)

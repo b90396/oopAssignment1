@@ -40,6 +40,7 @@ class Game
       bool IsProjectileAtPosition(int x, int y);
       bool IsEnemyProjectileAtPosition(int x, int y);
       bool IsPlayerDead();
+      bool EnemiesAtEnd();
       
       int getScore();
       int getLives();
