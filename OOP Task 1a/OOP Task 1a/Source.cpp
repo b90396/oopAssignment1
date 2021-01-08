@@ -68,9 +68,6 @@ int main()
             DrawText("HIGHSCORE: %i" + highScores.front(), 610, 550, 20, LIGHTGRAY);
 
         }
-
-        
-
         if (game.IsRunning() && !pause && !gameOver)
         {
             if (game.player.getLives() == 3){
@@ -111,12 +108,14 @@ int main()
                  if (volumeCount % 2 == 0) 
                  {
                     SetMusicVolume(music, 0.0f);
-                    SetMusicVolume(goMusic, 0.0f);
+                    SetSoundVolume(shot, 0.0f);
+
                  }
                  else 
                  {
-                    SetMusicVolume(music, 1.0f);
-                    SetMusicVolume(goMusic, 1.0f);
+                    SetMusicVolume(music, 0.5f);
+                    SetSoundVolume(shot, 1.0f);
+
                  }
             }
             HandleCollisions(game);
@@ -209,9 +208,16 @@ int main()
         {
              DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
              StopMusicStream(music);
-             SetMusicVolume(goMusic, 2.0f);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
+             if(volumeCount % 2 ==0)
+             {
+                SetMusicVolume(goMusic, 0.0f);
+             }
+             if (volumeCount % 2 != 0)
+             {
+                 SetMusicVolume(goMusic, 1.0f);
+             }
              
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);
