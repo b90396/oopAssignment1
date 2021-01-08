@@ -327,7 +327,10 @@ bool Game::EnemiesAtEnd()
 {
     for (int i = 0; i < enemies.size(); i++)
     {
-
+        if (enemies[i].getYPos() == 19)
+        {
+            return true;
+        }
     }
 }
 bool Game::IsPlayerDead()

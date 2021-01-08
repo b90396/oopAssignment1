@@ -196,7 +196,7 @@ int main()
                 timeDelayForPlayerProjectile = 0;
             }
 
-            if (game.IsPlayerDead() == true)
+            if (game.IsPlayerDead() == true || game.EnemiesAtEnd() == true) 
             {
                 gameOver = true;
             }
