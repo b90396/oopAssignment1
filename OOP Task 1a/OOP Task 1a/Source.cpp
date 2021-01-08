@@ -24,6 +24,7 @@ int main()
     float timeDelayForEnemyShoot = 0;
     float playerShootCooldown = 0;
     char enemyDirection = 'R';
+    bool movedDown = false;
     bool pause = false;
     bool gameOver = false;
     bool resetgame = false;
@@ -123,19 +124,34 @@ int main()
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
+                
 
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
 
-
-                    if (game.enemies[i].getXPos() == 1)
+                    if (game.enemies[i].getXPos() == 1 && !movedDown)
+                    {
+                        enemyDirection = 'D';
+                        movedDown = true;
+                    }
+                    else if (game.enemies[i].getXPos() == 1 && movedDown)
                     {
                         enemyDirection = 'R';
+                        movedDown = false;
                     }
 
-                    if (game.enemies[i].getXPos() == 20)
+                    
+                    if (game.enemies[i].getXPos() == 20 && !movedDown)
+                    {
+                        enemyDirection = 'D';
+                        movedDown = true;
+
+                    }
+                    else if (game.enemies[i].getXPos() == 20 && movedDown)
                     {
                         enemyDirection = 'L';
+                        movedDown = false;
+
                     }
 
 
