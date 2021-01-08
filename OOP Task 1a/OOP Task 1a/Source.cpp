@@ -122,7 +122,7 @@ int main()
             HandleCollisions(game);
 
             timeDelayForEnemyMovement += GetFrameTime();
-            if (timeDelayForEnemyMovement - 1 >= 0)
+            if (timeDelayForEnemyMovement - game.enemyspeed >= 0)
             {
                 
                 for (int i = 0; i < game.enemies.size(); i++)

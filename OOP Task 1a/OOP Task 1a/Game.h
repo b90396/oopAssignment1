@@ -28,7 +28,8 @@ class Game
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
       void BuildEnvironment();
-      int IncreaseSpeed();
+      void IncreaseSpeed();
+      void SetSpeed();
       void BuildWall1();
       void BuildWall2();
       void BuildWall3();

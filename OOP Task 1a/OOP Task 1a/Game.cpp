@@ -206,7 +206,7 @@ void Game::HandlePlayerProjectileToEnemyCollisions()
 
                 // remove Enemy.
                 enemies.erase(enemies.begin() + i);
-
+                IncreaseSpeed();
                 cout << "Hit the enemy." << endl;
             }
         }
@@ -300,13 +300,19 @@ void Game::HandleEnemyProjectileToWallCollisions()
     }
 }
 
-int Game::IncreaseSpeed()
+void Game::IncreaseSpeed()
 {
-    if (enemies.size() % 4 == 0)
+    if (enemies.size() % 5 == 0)
     {
-        enemyspeed -= 0.1;
+          enemyspeed -= 0.1;
     }
 }
+
+void Game::SetSpeed()
+{
+    enemyspeed = 1;
+}
+
 int Game::getScore()
 {
     return player.getScore();
@@ -333,6 +339,8 @@ bool Game::RestartGame()
 {
     if (enemies.size() == 0)
     {
+        
+        walls.clear();
         return true;
     }
 }
