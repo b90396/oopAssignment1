@@ -11,6 +11,8 @@ int main()
     InitAudioDevice(); // Initialize audio device
     Music music = LoadMusicStream("resources/audio/thememusic.mp3");
     Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
+    Sound shot = LoadSound("resources/audio/laser.mp3");
+
     goMusic.loopCount = 1;
 
     music.loopCount = 0;
@@ -39,6 +41,8 @@ int main()
     Texture2D eProj = LoadTexture("resources/eBullet.png");
     Texture2D title = LoadTexture("resources/spaceInvadersTitle.png");
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
+    Texture2D heart = LoadTexture("resources/heart.png");
+    Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
 
     int screenWidth = 800;
     int screenHeight = 800;
@@ -46,7 +50,10 @@ int main()
     title.height = 168;
     hScores.width = 350;
     hScores.height =350;
-
+    heart.height = 40;
+    heart.width = 40;
+    emptyHeart.height = 40;
+    emptyHeart.width = 40;
     while (!WindowShouldClose())
     {
         UpdateMusicStream(music);
@@ -61,11 +68,28 @@ int main()
 
         if (game.IsRunning() && !pause && !gameOver)
         {
+            
+            if (game.player.getLives() == 3){
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(heart, 720, 220, RED);
+                DrawTexture(heart, 760, 220, RED);
+            }
+            if (game.player.getLives() == 2) {
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(heart, 720, 220, RED);
+                DrawTexture(emptyHeart, 760, 220, RED);
+            }
+            if (game.player.getLives() == 1) {
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(emptyHeart, 720, 220, RED);
+                DrawTexture(emptyHeart, 760, 220, RED);
+            }
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
 
             if (IsKeyPressed(KEY_SPACE) && playerShootCooldown >= 0.5)
             {
+                PlaySound(shot);
                 game.ProcessInput(KEY_SPACE);
                 playerShootCooldown = 0;
             }
@@ -181,6 +205,9 @@ int main()
         SetMusicVolume(goMusic, 2.0f);
         PlayMusicStream(goMusic);
         UpdateMusicStream(goMusic);
+         DrawTexture(emptyHeart, 680, 220, RED);
+         DrawTexture(emptyHeart, 720, 220, RED);
+         DrawTexture(emptyHeart, 760, 220, RED);
 
         if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
         {
