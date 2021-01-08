@@ -5,7 +5,7 @@ using namespace std;
 
 void Game::Setup()
 {
-    //CREATE ENEMIES HERE
+    SetSpeed();
     BuildEnvironment();
     player.setLives();
     player.resetScore();
@@ -339,7 +339,7 @@ bool Game::RestartGame()
 {
     if (enemies.size() == 0)
     {
-        
+        SetSpeed();
         walls.clear();
         return true;
     }
