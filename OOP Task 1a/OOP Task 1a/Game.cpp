@@ -323,6 +323,16 @@ int Game::getLives()
     return player.getLives();
 }
 
+bool Game::EnemiesAtEnd()
+{
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        if (enemies[i].getYPos() == 19)
+        {
+            return true;
+        }
+    }
+}
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)
