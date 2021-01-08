@@ -22,7 +22,7 @@ int main()
     float timeDelayForEnemyProjectile = 0;
     float timeDelayForEnemyShoot = 0;
     float playerShootCooldown = 0;
-    int directionCounter = 0;
+    char enemyDirection = 'R';
     bool pause = false;
     bool gameOver = false;
     bool resetgame = false;
@@ -93,35 +93,30 @@ int main()
             timeDelayForEnemyMovement += GetFrameTime();
             if (timeDelayForEnemyMovement - 1 >= 0)
             {
-                
+
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
-                    if (directionCounter < 3)
+
+
+                    if (game.enemies[i].getXPos() == 1)
                     {
-                        game.enemies[i].move('R');
+                        enemyDirection = 'R';
                     }
-                    
-                    if (directionCounter >= 3 && directionCounter < 6)
+
+                    if (game.enemies[i].getXPos() == 20)
                     {
-                        game.enemies[i].move('L');
+                        enemyDirection = 'L';
                     }
-                    
-                    if (directionCounter == 6)
-                    {
-                        game.enemies[i].move('D');
-                    }
+
 
                     //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
                 }
-                if (directionCounter == 6)
-                {
-                    directionCounter = 0;
 
-                }
-                else
+                for (int ii = 0; ii < game.enemies.size(); ii++)
                 {
-                    directionCounter++;
+                    game.enemies[ii].move(enemyDirection);
                 }
+
                 
                 
                 timeDelayForEnemyMovement = 0;
