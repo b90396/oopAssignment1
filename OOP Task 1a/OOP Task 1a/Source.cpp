@@ -18,6 +18,7 @@ int main()
     PlayMusicStream(music);
     Game game;
     game.Setup();
+    float enemyspeedincrement = 1;
     float timeDelayForEnemyMovement = 0;
     float timeDelayForPlayerProjectile = 0;
     float timeDelayForEnemyProjectile = 0;
@@ -121,7 +122,7 @@ int main()
             HandleCollisions(game);
 
             timeDelayForEnemyMovement += GetFrameTime();
-            if (timeDelayForEnemyMovement - 1 >= 0)
+            if (timeDelayForEnemyMovement - game.enemyspeed >= 0)
             {
                 
                 for (int i = 0; i < game.enemies.size(); i++)

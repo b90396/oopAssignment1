@@ -4,10 +4,8 @@
 #include "EnemyProjectile.h"
 Enemy::Enemy(int x, int y)
 {
-
 	xPos = x;
 	yPos = y;
-
 }
 
 void Enemy::setYPos()
@@ -49,7 +47,7 @@ bool Enemy::getIsHit()
 
 void Enemy::setSpeed()
 {
-	// Get X & Y Pos, increase speed at set points e.g: half of board = speed X2 , etc
+
 }
 
 int Enemy::getSpeed()
