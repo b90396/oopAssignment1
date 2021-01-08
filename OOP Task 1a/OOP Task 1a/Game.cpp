@@ -300,7 +300,13 @@ void Game::HandleEnemyProjectileToWallCollisions()
     }
 }
 
-
+int Game::IncreaseSpeed()
+{
+    if (enemies.size() % 4 == 0)
+    {
+        enemyspeed -= 0.1;
+    }
+}
 int Game::getScore()
 {
     return player.getScore();
