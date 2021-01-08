@@ -3,9 +3,8 @@
 #include "Game.h"
 #include "EnemyProjectile.h"
 Enemy::Enemy(int x, int y)
+	: xPos(x), yPos(y)
 {
-	xPos = x;
-	yPos = y;
 }
 
 void Enemy::setYPos()
