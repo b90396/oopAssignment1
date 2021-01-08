@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Game.h"
 #include "RandomNumberGenerator.h"
+#include <list>
 
 void HandleCollisions(Game& game);
 
@@ -11,8 +12,8 @@ int main()
     InitAudioDevice(); // Initialize audio device
     Music music = LoadMusicStream("resources/audio/thememusic.mp3");
     Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
-    goMusic.loopCount = 1;
-
+    Sound shot = LoadSound("resources/audio/laser.mp3");
+    SetMusicVolume(music, 0.5f);
     music.loopCount = 0;
     PlayMusicStream(music);
     Game game;
@@ -28,8 +29,7 @@ int main()
     bool resetgame = false;
     int randomNumber = 0;
     int volumeCount = 1;
-    int gameStart = 0;
-    int highScores[4];
+    list <int> highScores;
     
     //Load images
     Texture2D texture = LoadTexture("resources/playerShip.png");
@@ -39,6 +39,8 @@ int main()
     Texture2D eProj = LoadTexture("resources/eBullet.png");
     Texture2D title = LoadTexture("resources/spaceInvadersTitle.png");
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
+    Texture2D heart = LoadTexture("resources/heart.png");
+    Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
 
     int screenWidth = 800;
     int screenHeight = 800;
@@ -46,7 +48,10 @@ int main()
     title.height = 168;
     hScores.width = 350;
     hScores.height =350;
-
+    heart.height = 40;
+    heart.width = 40;
+    emptyHeart.height = 40;
+    emptyHeart.width = 40;
     while (!WindowShouldClose())
     {
         UpdateMusicStream(music);
@@ -54,18 +59,41 @@ int main()
         ClearBackground(BLACK);
         DrawTexture(title, 610, 10, YELLOW);
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
-        DrawText(FormatText("LIVES: %i", game.getLives()), 740,180, 20, LIGHTGRAY);
-        DrawTexture(hScores, 575, 220,WHITE);
+        DrawText("LIVES: ", 610,230, 20, LIGHTGRAY);
+        DrawTexture(hScores, 575, 250,WHITE);
         DrawText("PAUSE(P) MUTE(M)  EXIT(ESC)", 604, 570, 19, LIGHTGRAY);
+        if (highScores.size() != 0)
+        {
+            DrawText("HIGHSCORE: %i" + highScores.front(), 610, 550, 20, LIGHTGRAY);
+
+        }
+
         
 
         if (game.IsRunning() && !pause && !gameOver)
         {
+            if (game.player.getLives() == 3){
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(heart, 720, 220, RED);
+                DrawTexture(heart, 760, 220, RED);
+            }
+            if (game.player.getLives() == 2) {
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(heart, 720, 220, RED);
+                DrawTexture(emptyHeart, 760, 220, RED);
+            }
+            if (game.player.getLives() == 1) {
+                DrawTexture(heart, 680, 220, RED);
+                DrawTexture(emptyHeart, 720, 220, RED);
+                DrawTexture(emptyHeart, 760, 220, RED);
+            }
+           
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
 
             if (IsKeyPressed(KEY_SPACE) && playerShootCooldown >= 0.5)
             {
+                PlaySound(shot);
                 game.ProcessInput(KEY_SPACE);
                 playerShootCooldown = 0;
             }
@@ -76,17 +104,19 @@ int main()
             {
                 pause = true;
             }
-             if (IsKeyPressed(KEY_M))
+            if (IsKeyPressed(KEY_M))
             {
-            volumeCount ++;
-            if (volumeCount % 2 == 0) {
-                SetMusicVolume(music, 0.0f);
-                SetMusicVolume(goMusic, 0.0f);
-              }
-            else {
-                SetMusicVolume(music, 1.0f);
-                SetMusicVolume(goMusic, 1.0f);
-              }
+                 volumeCount ++;
+                 if (volumeCount % 2 == 0) 
+                 {
+                    SetMusicVolume(music, 0.0f);
+                    SetMusicVolume(goMusic, 0.0f);
+                 }
+                 else 
+                 {
+                    SetMusicVolume(music, 1.0f);
+                    SetMusicVolume(goMusic, 1.0f);
+                 }
             }
             HandleCollisions(game);
 
@@ -171,22 +201,26 @@ int main()
         }
         else if(gameOver)
         {
-        DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
-        StopMusicStream(music);
-        SetMusicVolume(goMusic, 2.0f);
-        PlayMusicStream(goMusic);
-        UpdateMusicStream(goMusic);
+             DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
+             StopMusicStream(music);
+             SetMusicVolume(goMusic, 2.0f);
+             PlayMusicStream(goMusic);
+             UpdateMusicStream(goMusic);
+             
+             DrawTexture(emptyHeart, 680, 220, RED);
+             DrawTexture(emptyHeart, 720, 220, RED);
+             DrawTexture(emptyHeart, 760, 220, RED);
+        
+              if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
+              {
+                    gameOver = false;
+                     //PauseMusicStream(goMusic);
+                     PlayMusicStream(music);
+                     UpdateMusicStream(music);
+                     game = Game();
+                     game.Setup();
 
-        if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
-        {
-            gameOver = false;
-            PauseMusicStream(goMusic);
-            PlayMusicStream(music);
-            UpdateMusicStream(music);
-            game = Game();
-            game.Setup();
-
-        }
+              }
         }
         else
         {
