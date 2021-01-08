@@ -128,30 +128,33 @@ int main()
 
                 for (int i = 0; i < game.enemies.size(); i++)
                 {
+                   
 
                     if (game.enemies[i].getXPos() == 1 && !movedDown)
                     {
                         enemyDirection = 'D';
                         movedDown = true;
+                        break;
+                        
                     }
                     else if (game.enemies[i].getXPos() == 1 && movedDown)
                     {
                         enemyDirection = 'R';
                         movedDown = false;
+                        break;
                     }
-
                     
                     if (game.enemies[i].getXPos() == 20 && !movedDown)
                     {
                         enemyDirection = 'D';
                         movedDown = true;
-
+                        break;
                     }
                     else if (game.enemies[i].getXPos() == 20 && movedDown)
                     {
                         enemyDirection = 'L';
                         movedDown = false;
-
+                        break;
                     }
 
 
