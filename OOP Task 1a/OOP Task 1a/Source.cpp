@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Game.h"
 #include "RandomNumberGenerator.h"
+#include <list>
 
 void HandleCollisions(Game& game);
 
@@ -12,9 +13,7 @@ int main()
     Music music = LoadMusicStream("resources/audio/thememusic.mp3");
     Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
     Sound shot = LoadSound("resources/audio/laser.mp3");
-
-    goMusic.loopCount = 1;
-
+    SetMusicVolume(music, 0.5f);
     music.loopCount = 0;
     PlayMusicStream(music);
     Game game;
@@ -30,8 +29,7 @@ int main()
     bool resetgame = false;
     int randomNumber = 0;
     int volumeCount = 1;
-    int gameStart = 0;
-    int highScores[4];
+    list <int> highScores;
     
     //Load images
     Texture2D texture = LoadTexture("resources/playerShip.png");
@@ -61,14 +59,19 @@ int main()
         ClearBackground(BLACK);
         DrawTexture(title, 610, 10, YELLOW);
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
-        DrawText(FormatText("LIVES: %i", game.getLives()), 740,180, 20, LIGHTGRAY);
-        DrawTexture(hScores, 575, 220,WHITE);
+        DrawText("LIVES: ", 610,230, 20, LIGHTGRAY);
+        DrawTexture(hScores, 575, 250,WHITE);
         DrawText("PAUSE(P) MUTE(M)  EXIT(ESC)", 604, 570, 19, LIGHTGRAY);
+        if (highScores.size() != 0)
+        {
+            DrawText("HIGHSCORE: %i" + highScores.front(), 610, 550, 20, LIGHTGRAY);
+
+        }
+
         
 
         if (game.IsRunning() && !pause && !gameOver)
         {
-            
             if (game.player.getLives() == 3){
                 DrawTexture(heart, 680, 220, RED);
                 DrawTexture(heart, 720, 220, RED);
@@ -84,6 +87,7 @@ int main()
                 DrawTexture(emptyHeart, 720, 220, RED);
                 DrawTexture(emptyHeart, 760, 220, RED);
             }
+           
             if (IsKeyPressed(KEY_RIGHT))  game.ProcessInput(KEY_RIGHT);
             if (IsKeyPressed(KEY_LEFT))   game.ProcessInput(KEY_LEFT);
 
@@ -100,17 +104,19 @@ int main()
             {
                 pause = true;
             }
-             if (IsKeyPressed(KEY_M))
+            if (IsKeyPressed(KEY_M))
             {
-            volumeCount ++;
-            if (volumeCount % 2 == 0) {
-                SetMusicVolume(music, 0.0f);
-                SetMusicVolume(goMusic, 0.0f);
-              }
-            else {
-                SetMusicVolume(music, 1.0f);
-                SetMusicVolume(goMusic, 1.0f);
-              }
+                 volumeCount ++;
+                 if (volumeCount % 2 == 0) 
+                 {
+                    SetMusicVolume(music, 0.0f);
+                    SetMusicVolume(goMusic, 0.0f);
+                 }
+                 else 
+                 {
+                    SetMusicVolume(music, 1.0f);
+                    SetMusicVolume(goMusic, 1.0f);
+                 }
             }
             HandleCollisions(game);
 
@@ -200,25 +206,26 @@ int main()
         }
         else if(gameOver)
         {
-        DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
-        StopMusicStream(music);
-        SetMusicVolume(goMusic, 2.0f);
-        PlayMusicStream(goMusic);
-        UpdateMusicStream(goMusic);
-         DrawTexture(emptyHeart, 680, 220, RED);
-         DrawTexture(emptyHeart, 720, 220, RED);
-         DrawTexture(emptyHeart, 760, 220, RED);
+             DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
+             StopMusicStream(music);
+             SetMusicVolume(goMusic, 2.0f);
+             PlayMusicStream(goMusic);
+             UpdateMusicStream(goMusic);
+             
+             DrawTexture(emptyHeart, 680, 220, RED);
+             DrawTexture(emptyHeart, 720, 220, RED);
+             DrawTexture(emptyHeart, 760, 220, RED);
+        
+              if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
+              {
+                    gameOver = false;
+                     //PauseMusicStream(goMusic);
+                     PlayMusicStream(music);
+                     UpdateMusicStream(music);
+                     game = Game();
+                     game.Setup();
 
-        if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
-        {
-            gameOver = false;
-            PauseMusicStream(goMusic);
-            PlayMusicStream(music);
-            UpdateMusicStream(music);
-            game = Game();
-            game.Setup();
-
-        }
+              }
         }
         else
         {
