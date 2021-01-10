@@ -10,8 +10,8 @@ int main()
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
     InitAudioDevice(); // Initialize audio device
-    Music music = LoadMusicStream("resources/audio/thememusic.mp3");
-    Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
+    Music music = LoadMusicStream("resources/audio/thememusic1.mp3");
+    Music goMusic = LoadMusicStream("resources/audio/gameOver1.mp3");
     Sound shot = LoadSound("resources/audio/laser.mp3");
     SetMusicVolume(music, 0.5f);
     music.loopCount = 0;
@@ -37,8 +37,8 @@ int main()
     Texture2D wall = LoadTexture("resources/brickwall2.png");
     Texture2D alien = LoadTexture("resources/alien2.png");
     Texture2D pProj = LoadTexture("resources/pBullet.png");
-    Texture2D eProj = LoadTexture("resources/eBullet.png");
-    Texture2D title = LoadTexture("resources/spaceInvadersTitle.png");
+    Texture2D eProj = LoadTexture("resources/laserBolt.png");
+    Texture2D title = LoadTexture("resources/spaceInvadersTitlee.png");
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
     Texture2D heart = LoadTexture("resources/heart.png");
     Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
@@ -46,7 +46,7 @@ int main()
     int screenWidth = 800;
     int screenHeight = 800;
     title.width = 300;
-    title.height = 168;
+    title.height = 150;
     hScores.width = 350;
     hScores.height =350;
     heart.height = 40;
@@ -58,7 +58,7 @@ int main()
         UpdateMusicStream(music);
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawTexture(title, 610, 10, YELLOW);
+        DrawTexture(title, 595, 20, YELLOW);
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
         DrawText("LIVES: ", 610,230, 20, LIGHTGRAY);
         DrawTexture(hScores, 575, 250,WHITE);
@@ -113,12 +113,12 @@ int main()
                  if (volumeCount % 2 == 0) 
                  {
                     SetMusicVolume(music, 0.0f);
-                    SetMusicVolume(goMusic, 0.0f);
+                    SetSoundVolume(shot, 0.0f);
                  }
                  else 
                  {
-                    SetMusicVolume(music, 1.0f);
-                    SetMusicVolume(goMusic, 1.0f);
+                    SetMusicVolume(music, 0.5f);
+                    SetSoundVolume(shot, 1.0f);
                  }
             }
             HandleCollisions(game);
@@ -228,9 +228,16 @@ int main()
         {
              DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
              StopMusicStream(music);
-             SetMusicVolume(goMusic, 2.0f);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
+            if(volumeCount % 2 ==0)
+             {
+                SetMusicVolume(goMusic, 0.0f);
+             }
+             if (volumeCount % 2 != 0)
+             {
+                 SetMusicVolume(goMusic, 1.0f);
+             }
              DrawText("PRESS (ENTER) TO RESTART", 610, 530, 19, LIGHTGRAY);
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);
