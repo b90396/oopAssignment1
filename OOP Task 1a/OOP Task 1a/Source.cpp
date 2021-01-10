@@ -10,8 +10,8 @@ int main()
     InitWindow(900, 600, "OOP Assignment 1");
     SetTargetFPS(60);
     InitAudioDevice(); // Initialize audio device
-    Music music = LoadMusicStream("resources/audio/thememusic.mp3");
-    Music goMusic = LoadMusicStream("resources/audio/gameOver.mp3");
+    Music music = LoadMusicStream("resources/audio/thememusic1.mp3");
+    Music goMusic = LoadMusicStream("resources/audio/gameOver1.mp3");
     Sound shot = LoadSound("resources/audio/laser.mp3");
     SetMusicVolume(music, 0.5f);
     music.loopCount = 0;
@@ -37,8 +37,8 @@ int main()
     Texture2D wall = LoadTexture("resources/brickwall2.png");
     Texture2D alien = LoadTexture("resources/alien2.png");
     Texture2D pProj = LoadTexture("resources/pBullet.png");
-    Texture2D eProj = LoadTexture("resources/eBullet.png");
-    Texture2D title = LoadTexture("resources/spaceInvadersTitle.png");
+    Texture2D eProj = LoadTexture("resources/laserBolt.png");
+    Texture2D title = LoadTexture("resources/spaceInvadersTitlee.png");
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
     Texture2D heart = LoadTexture("resources/heart.png");
     Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
@@ -46,7 +46,7 @@ int main()
     int screenWidth = 800;
     int screenHeight = 800;
     title.width = 300;
-    title.height = 168;
+    title.height = 150;
     hScores.width = 350;
     hScores.height =350;
     heart.height = 40;
@@ -58,7 +58,7 @@ int main()
         UpdateMusicStream(music);
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawTexture(title, 610, 10, YELLOW);
+        DrawTexture(title, 595, 20, YELLOW);
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
         DrawText("LIVES: ", 610,230, 20, LIGHTGRAY);
         DrawTexture(hScores, 575, 250,WHITE);
