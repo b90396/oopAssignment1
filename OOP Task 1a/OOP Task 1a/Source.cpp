@@ -18,13 +18,13 @@ int main()
     PlayMusicStream(music);
     Game game;
     game.Setup();
-    float enemyspeedincrement = 1;
     float timeDelayForEnemyMovement = 0;
     float timeDelayForPlayerProjectile = 0;
     float timeDelayForEnemyProjectile = 0;
     float timeDelayForEnemyShoot = 0;
     float playerShootCooldown = 0;
-    int directionCounter = 0;
+    char enemyDirection = 'R';
+    bool movedDown = true;
     bool pause = false;
     bool gameOver = false;
     bool resetgame = false;
@@ -68,8 +68,13 @@ int main()
             DrawText("HIGHSCORE: %i" + highScores.front(), 610, 550, 20, LIGHTGRAY);
 
         }
+
+        
+
         if (game.IsRunning() && !pause && !gameOver)
         {
+
+
             if (game.player.getLives() == 3){
                 DrawTexture(heart, 680, 220, RED);
                 DrawTexture(heart, 720, 220, RED);
@@ -108,54 +113,17 @@ int main()
                  if (volumeCount % 2 == 0) 
                  {
                     SetMusicVolume(music, 0.0f);
-                    SetSoundVolume(shot, 0.0f);
-
+                    SetMusicVolume(goMusic, 0.0f);
                  }
                  else 
                  {
-                    SetMusicVolume(music, 0.5f);
-                    SetSoundVolume(shot, 1.0f);
-
+                    SetMusicVolume(music, 1.0f);
+                    SetMusicVolume(goMusic, 1.0f);
                  }
             }
             HandleCollisions(game);
 
-            timeDelayForEnemyMovement += GetFrameTime();
-            if (timeDelayForEnemyMovement - game.enemyspeed >= 0)
-            {
-                
-                for (int i = 0; i < game.enemies.size(); i++)
-                {
-                    if (directionCounter < 3)
-                    {
-                        game.enemies[i].move('R');
-                    }
-                    
-                    if (directionCounter >= 3 && directionCounter < 6)
-                    {
-                        game.enemies[i].move('L');
-                    }
-                    
-                    if (directionCounter == 6)
-                    {
-                        game.enemies[i].move('D');
-                    }
-
-                    //FIX STARTING POSITION AND THEN NUMBER AFTERWARDS SO ENEMIES START AT FAR LEFT OF THE GRID
-                }
-                if (directionCounter == 6)
-                {
-                    directionCounter = 0;
-
-                }
-                else
-                {
-                    directionCounter++;
-                }
-                
-                
-                timeDelayForEnemyMovement = 0;
-            }
+            
 
             timeDelayForEnemyMovement += GetFrameTime();
             timeDelayForEnemyShoot += GetFrameTime();
@@ -195,7 +163,7 @@ int main()
                 timeDelayForPlayerProjectile = 0;
             }
 
-            if (game.IsPlayerDead() == true || game.EnemiesAtEnd() == true) 
+            if (game.IsPlayerDead() == true)
             {
                 gameOver = true;
             }
@@ -203,21 +171,66 @@ int main()
             {
                 game.BuildEnvironment();
             }
+
+            timeDelayForEnemyMovement += GetFrameTime();
+            if (timeDelayForEnemyMovement - 1 >= 0)
+            {
+
+
+                for (int i = 0; i < game.enemies.size(); i++)
+                {
+
+                    if (game.enemies[i].getXPos() == 1 && movedDown)
+                    {
+                        enemyDirection = 'R';
+                        movedDown = false;
+                        break;
+                    }
+
+                    if (game.enemies[i].getXPos() == 1 && !movedDown)
+                    {
+                        enemyDirection = 'D';
+                        movedDown = true;
+                        break;
+
+                    }
+                    
+                    if (game.enemies[i].getXPos() == 20 && movedDown)
+                    {
+                        enemyDirection = 'L';
+                        movedDown = false;
+                        break;
+                    }
+
+                    if (game.enemies[i].getXPos() == 20 && !movedDown)
+                    {
+                        enemyDirection = 'D';
+                        movedDown = true;
+                        break;
+                    }
+                    
+                }
+
+
+                timeDelayForEnemyMovement = 0;
+
+                for (int ii = 0; ii < game.enemies.size(); ii++)
+                {
+                    game.enemies[ii].move(enemyDirection);
+                }
+            }
+
+            
+
+
         }
         else if(gameOver)
         {
              DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
              StopMusicStream(music);
+             SetMusicVolume(goMusic, 2.0f);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
-             if(volumeCount % 2 ==0)
-             {
-                SetMusicVolume(goMusic, 0.0f);
-             }
-             if (volumeCount % 2 != 0)
-             {
-                 SetMusicVolume(goMusic, 1.0f);
-             }
              
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);

@@ -59,16 +59,24 @@ void Enemy::move(char direction)
 	if (direction == 'L')
 	{
 		xPos -= 1;
+		moveCounter = 0;
 	}
 
 	if (direction == 'R')
 	{
 		xPos += 1;
+		moveCounter = 0;
 	}
 
-	if (direction == 'D')
+	if (direction == 'D' && moveCounter == 0)
 	{
 		yPos += 1;
+		moveCounter = 1;
+	}
+	else if(moveCounter == 1)
+	{
+		xPos += 1;
+		moveCounter == 0;
 	}
 }
 
