@@ -21,12 +21,15 @@ class Game
       vector<Projectile> projectiles;
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
+      float enemyspeed = 1;
 
       void BuildEnemies();
       void Setup();
       void ProcessInput(int key);
       vector<vector<char>> PrepareGrid();
       void BuildEnvironment();
+      void IncreaseSpeed();
+      void SetSpeed();
       void BuildWall1();
       void BuildWall2();
       void BuildWall3();
@@ -37,6 +40,7 @@ class Game
       bool IsProjectileAtPosition(int x, int y);
       bool IsEnemyProjectileAtPosition(int x, int y);
       bool IsPlayerDead();
+      bool EnemiesAtEnd();
       
       int getScore();
       int getLives();

@@ -5,7 +5,7 @@ using namespace std;
 
 void Game::Setup()
 {
-    //CREATE ENEMIES HERE
+    SetSpeed();
     BuildEnvironment();
     player.setLives();
     player.resetScore();
@@ -206,7 +206,7 @@ void Game::HandlePlayerProjectileToEnemyCollisions()
 
                 // remove Enemy.
                 enemies.erase(enemies.begin() + i);
-
+                IncreaseSpeed();
                 cout << "Hit the enemy." << endl;
             }
         }
@@ -300,6 +300,18 @@ void Game::HandleEnemyProjectileToWallCollisions()
     }
 }
 
+void Game::IncreaseSpeed()
+{
+    if (enemies.size() % 5 == 0)
+    {
+          enemyspeed -= 0.1;
+    }
+}
+
+void Game::SetSpeed()
+{
+    enemyspeed = 1;
+}
 
 int Game::getScore()
 {
@@ -311,6 +323,16 @@ int Game::getLives()
     return player.getLives();
 }
 
+bool Game::EnemiesAtEnd()
+{
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        if (enemies[i].getYPos() == 19)
+        {
+            return true;
+        }
+    }
+}
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)
@@ -327,6 +349,8 @@ bool Game::RestartGame()
 {
     if (enemies.size() == 0)
     {
+        SetSpeed();
+        walls.clear();
         return true;
     }
 }
