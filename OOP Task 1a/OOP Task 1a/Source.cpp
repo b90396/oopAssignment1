@@ -43,6 +43,8 @@ int main()
     Texture2D heart = LoadTexture("resources/heart.png");
     Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
 
+    
+
     int screenWidth = 800;
     int screenHeight = 800;
     title.width = 300;
@@ -212,6 +214,8 @@ int main()
              SetMusicVolume(goMusic, 2.0f);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
+
+             game.SavePlayerScore();
              
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);

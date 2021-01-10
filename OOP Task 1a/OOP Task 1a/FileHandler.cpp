@@ -4,9 +4,9 @@ FileHandler::FileHandler() {}
 
 FileHandler::~FileHandler() {}
 
-void FileHandler::WriteToFile(string name, string content)
+void FileHandler::WriteToFile(string filename, string content)
 {
-    ofstream file(name);
+    ofstream file(filename);
 
     // if file opened successfully...
     if (file.is_open())
@@ -21,10 +21,10 @@ void FileHandler::WriteToFile(string name, string content)
     }
 }
 
-string FileHandler::ReadFromFile(string name)
+string FileHandler::ReadFromFile(string filename)
 {
     string line, content;
-    ifstream file(name);
+    ifstream file(filename);
 
     // if file opened successfully..
     if (file.is_open())
@@ -44,4 +44,11 @@ string FileHandler::ReadFromFile(string name)
     }
 
     return content;
+}
+
+void FileHandler::ClearFile( string filename )
+{
+    ofstream ofs;
+    ofs.open(filename, ofstream::out | ofstream::trunc);
+    ofs.close();
 }

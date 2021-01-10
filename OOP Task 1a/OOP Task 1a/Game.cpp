@@ -323,6 +323,11 @@ int Game::getLives()
     return player.getLives();
 }
 
+void Game::SavePlayerScore()
+{
+    fh.WriteToFile("score-info.txt", to_string(getScore()));
+}
+
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)
