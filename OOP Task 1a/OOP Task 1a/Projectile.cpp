@@ -7,10 +7,8 @@ Projectile::Projectile()
 }
 
 Projectile::Projectile(int x, int y, float speed)
+	:x(x), y(y), speed(speed)
 {
-	this->x = x;
-	this->y = y;
-	this->speed = speed;
 	hasHitBarrier = hasHitProjectile = false;
 }
 

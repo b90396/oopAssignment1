@@ -5,7 +5,7 @@ using namespace std;
 
 void Game::Setup()
 {
-    //CREATE ENEMIES HERE
+    SetSpeed();
     BuildEnvironment();
     player.setLives();
     player.resetScore();
@@ -323,11 +323,6 @@ int Game::getLives()
     return player.getLives();
 }
 
-void Game::SavePlayerScore()
-{
-    fh.WriteToFile("score-info.txt", to_string(getScore()));
-}
-
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)
@@ -344,7 +339,7 @@ bool Game::RestartGame()
 {
     if (enemies.size() == 0)
     {
-        
+        SetSpeed();
         walls.clear();
         return true;
     }

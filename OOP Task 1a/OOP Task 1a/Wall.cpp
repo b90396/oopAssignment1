@@ -6,10 +6,9 @@ Wall::Wall()
 }
 
 Wall::Wall(int x, int y)
+    :x(x), y(y)
 {
     symbol = WALL;
-    this->x = x;
-    this->y = y;
 }
 
 bool Wall::IsAtPosition(int x, int y)
