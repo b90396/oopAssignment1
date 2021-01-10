@@ -332,6 +332,7 @@ bool Game::EnemiesAtEnd()
             return true;
         }
     }
+    return false;
 }
 bool Game::IsPlayerDead()
 {
