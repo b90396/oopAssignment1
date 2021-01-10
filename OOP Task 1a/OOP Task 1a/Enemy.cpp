@@ -13,6 +13,7 @@
 	called in game.cpp.
 */
 
+
 Enemy::Enemy(int x, int y)
 	: xPos(x), yPos(y)
 {}

@@ -8,6 +8,7 @@
 *  All public encapsulation functions are also included in the header file.
 */
 
+
 using namespace std;
 class Enemy
 {

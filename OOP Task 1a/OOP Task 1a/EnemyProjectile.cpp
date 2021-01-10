@@ -8,6 +8,7 @@
 *  (Specific to the enemy projectiles since they are the only projectiles that interact with the player),
 *  For use when the game is running.
 */
+
 void EnemyProjectile::setHasHitPlayer()
 {
 	hasHitPlayer = true;

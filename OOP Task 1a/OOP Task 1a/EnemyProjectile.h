@@ -6,6 +6,7 @@
 * used in the Projectile class.
 * Includes all public methods to be accessed in the Game and Source files and the private variable used in the projectile classes
 */
+
 class EnemyProjectile : public Projectile
 {
 public:

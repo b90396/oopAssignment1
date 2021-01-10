@@ -7,7 +7,7 @@ void HandleCollisions(Game& game);
 
 int main()
 {
-    InitWindow(900, 600, "OOP Assignment 1");
+    InitWindow(900, 600, "Space Race");
     SetTargetFPS(60);
     InitAudioDevice(); // Initialize audio device
     Music music = LoadMusicStream("resources/audio/thememusic1.mp3");
