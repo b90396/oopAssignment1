@@ -163,7 +163,7 @@ int main()
                 timeDelayForPlayerProjectile = 0;
             }
 
-            if (game.IsPlayerDead() == true)
+            if (game.IsPlayerDead() == true || game.EnemiesAtEnd() == true)
             {
                 gameOver = true;
             }
@@ -231,7 +231,7 @@ int main()
              SetMusicVolume(goMusic, 2.0f);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
-             
+             DrawText("PRESS (ENTER) TO RESTART", 610, 530, 19, LIGHTGRAY);
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);
              DrawTexture(emptyHeart, 760, 220, RED);
