@@ -33,7 +33,7 @@ int main()
     list <int> highScores;
     
     //Load images
-    Texture2D texture = LoadTexture("resources/pShipTrans.png");
+    Texture2D texture = LoadTexture("resources/playerShip.png");
     Texture2D wall = LoadTexture("resources/bwAnimate.png");
     Texture2D alien = LoadTexture("resources/alienAnimation.png");
     Texture2D eProj = LoadTexture("resources/lbaV2.png");
@@ -49,7 +49,7 @@ int main()
     title.width = 300;
     title.height = 150;
     hScores.width = 350;
-    hScores.height =350;
+    hScores.height = 350;
     heart.height = 40;
     heart.width = 40;
     emptyHeart.height = 40;
@@ -57,13 +57,14 @@ int main()
     texture.height = 30;
     texture.width = 30;
     wall.height = 30;
-    wall.width = 30;
+    wall.width = 120;
     alien.height = 30;
-    alien.width = 30;
+    alien.width = 90;
     pProj.height = 30;
-    pProj.width = 30;
+    pProj.width = 60;
     eProj.height = 30;
-    eProj.width = 30;
+    eProj.width = 60;
+    
     
     
     float alienFrameWidth = (float)(alien.width / 3);
