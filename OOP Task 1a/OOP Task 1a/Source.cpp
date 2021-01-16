@@ -33,16 +33,17 @@ int main()
     list <int> highScores;
     
     //Load images
-    Texture2D texture = LoadTexture("resources/playerShip.png");
-    Texture2D wall = LoadTexture("resources/brickwall2.png");
-    Texture2D alien = LoadTexture("resources/alien2.png");
-    Texture2D pProj = LoadTexture("resources/pBullet.png");
-    Texture2D eProj = LoadTexture("resources/laserBolt.png");
+    Texture2D texture = LoadTexture("resources/pShipTrans.png");
+    Texture2D wall = LoadTexture("resources/bwAnimate.png");
+    Texture2D alien = LoadTexture("resources/alienAnimation.png");
+    Texture2D eProj = LoadTexture("resources/lbaV2.png");
+    Texture2D pProj = LoadTexture("resources/rAnimate.png");
     Texture2D title = LoadTexture("resources/spaceInvadersTitlee.png");
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
     Texture2D heart = LoadTexture("resources/heart.png");
     Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
-
+    
+    
     int screenWidth = 800;
     int screenHeight = 800;
     title.width = 300;
@@ -53,6 +54,36 @@ int main()
     heart.width = 40;
     emptyHeart.height = 40;
     emptyHeart.width = 40;
+    texture.height = 30;
+    texture.width = 30;
+    wall.height = 30;
+    wall.width = 30;
+    alien.height = 30;
+    alien.width = 30;
+    pProj.height = 30;
+    pProj.width = 30;
+    eProj.height = 30;
+    eProj.width = 30;
+    
+    
+    float alienFrameWidth = (float)(alien.width / 3);
+    int maxAlienFrames = (int)(alien.width / (int)alienFrameWidth);
+
+    float eProjFrameWidth = (float)(eProj.width / 2);
+    int maxEpFrames = (int)(eProj.width / (int)eProjFrameWidth);
+
+    float wallFrameWidth = (float)(wall.width / 4);
+    int maxWallFrames = (int)(wall.width / (int)wallFrameWidth);
+
+    float rFrameWidth = (float)(pProj.width / 2);
+    int maxRFrames = (int)(pProj.width / (int)rFrameWidth);
+
+    float timer = 0.0f;
+    int Aframe = 0;
+    int Wframe = 0;
+    int EPframe = 0;
+    int PPframe = 0;
+    
     while (!WindowShouldClose())
     {
         UpdateMusicStream(music);
@@ -270,30 +301,41 @@ int main()
 
         const auto grid = game.PrepareGrid();
 
+        timer += GetFrameTime();
+        Aframe = Aframe % maxAlienFrames;
+        EPframe = EPframe % maxEpFrames;
+        Wframe = Wframe % maxWallFrames;
+        PPframe = PPframe % maxRFrames;
+        
+        if (timer >= 0.2f) {
+            timer = 0.0f;
+            Aframe += 1;
+            EPframe += 1;
+            Wframe += 1;
+            PPframe += 1;
+        }
+        
         for (int x = 0; x < SIZE; x++)
         {
             for (int y = 0; y < SIZE; y++)
             {
                int xPosition = x * cellSize;
                 int yPosition = y * cellSize;
-                 texture.height = 30;
-                 texture.width = 30;
-                 wall.height = 30;
-                 wall.width = 30;
-                 alien.height = 30;
-                 alien.width = 30;
-                 pProj.height = 30;
-                 pProj.width = 30;
-                 eProj.height = 30;
-                 eProj.width = 30;
+                float xpos = xPosition;
+                float ypos = yPosition;
                 switch (grid[y][x])
                 {
-                    case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
-                    case WALL: DrawTexture(wall, xPosition, yPosition, WHITE);    break; // DrawRectangle(xPosition, yPosition, cellSize, cellSize, LIGHTGRAY); break;
+                     case FLOOR:  DrawRectangle(xPosition, yPosition, cellSize, cellSize, BLACK); break;
+
+                    case WALL: DrawTextureRec(wall, Rectangle{ wallFrameWidth * Wframe,0,wallFrameWidth,(float)wall.height }, Vector2{ xpos,ypos }, WHITE);    break;
+
                     case PLAYER: DrawTexture(texture, xPosition, yPosition, WHITE);    break;
-                    case ENEMY:  DrawTexture(alien, xPosition, yPosition, WHITE);    break;      break;
-                    case PLAYERPROJECTILE: DrawTexture(pProj, xPosition, yPosition, WHITE);  break;
-                    case ENEMYPROJECTILE: DrawTexture(eProj, xPosition, yPosition, WHITE);  break;
+      
+                    case ENEMY:  DrawTextureRec(alien, Rectangle{ alienFrameWidth *Aframe,0,alienFrameWidth,(float)alien.height },Vector2{xpos,ypos},WHITE);    break;  
+
+                    case PLAYERPROJECTILE: DrawTextureRec(pProj, Rectangle{ rFrameWidth * PPframe,0,rFrameWidth,(float)pProj.height }, Vector2{ xpos,ypos }, WHITE);  break;
+
+                    case ENEMYPROJECTILE: DrawTextureRec(eProj, Rectangle{ eProjFrameWidth *EPframe,0,eProjFrameWidth,(float)eProj.height }, Vector2{ xpos,ypos }, WHITE);  break;
                     default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
                 }
 
