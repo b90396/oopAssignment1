@@ -323,6 +323,43 @@ int Game::getLives()
     return player.getLives();
 }
 
+void Game::SavePlayerScore()
+{
+    fh.WriteToFile("score-data.txt", to_string(getScore()));
+}
+
+vector<int> Game::GetHighScores()
+{
+    vector<int> HighScores;
+    string scoreData = fh.ReadFromFile("score-data.txt");
+    cout << "Current Score Data In File: -\n" << scoreData << endl;
+    char delim = ' ';
+
+    string score = "";
+    for (int i = 0; i < scoreData.size(); i++)
+    {
+        if (scoreData[i] != delim)
+        {
+            score += scoreData[i];
+        }
+        else
+        {
+            HighScores.push_back(stoi(score));
+            score = "";
+        }
+    }
+
+    cout << "Integer list of the same thing.\n";
+
+    for (int i = 0; i < HighScores.size(); i++)
+    {
+        cout << HighScores[i] << endl;
+    }
+    
+
+    return HighScores;
+}
+
 bool Game::IsPlayerDead()
 {
     if (player.getLives() <= 0)

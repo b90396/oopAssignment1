@@ -6,7 +6,7 @@ FileHandler::~FileHandler() {}
 
 void FileHandler::WriteToFile(string filename, string content)
 {
-    ofstream file(filename);
+    ofstream file(filename, ios_base::app | ios_base::out);
 
     // if file opened successfully...
     if (file.is_open())
@@ -33,7 +33,7 @@ string FileHandler::ReadFromFile(string filename)
         while (getline(file, line))
         {
             // concatenate file content to string.
-            content += line;
+            content += line + " ";
         }
 
         file.close();

@@ -31,6 +31,9 @@ int main()
     int randomNumber = 0;
     int volumeCount = 1;
     list <int> highScores;
+    bool HasSavedScore = false;
+
+    game.GetHighScores();
     
     //Load images
     Texture2D texture = LoadTexture("resources/playerShip.png");
@@ -42,8 +45,6 @@ int main()
     Texture2D hScores = LoadTexture("resources/highScoresTable.png");
     Texture2D heart = LoadTexture("resources/heart.png");
     Texture2D emptyHeart = LoadTexture("resources/emptyHeart.png");
-
-    
 
     int screenWidth = 800;
     int screenHeight = 800;
@@ -234,7 +235,13 @@ int main()
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
 
-             game.SavePlayerScore();
+             if (!HasSavedScore)
+             {
+                 game.SavePlayerScore();
+                 HasSavedScore = true;
+             }
+             else {}
+             
              
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);

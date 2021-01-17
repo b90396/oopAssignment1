@@ -48,6 +48,7 @@ class Game
       int getLives();
 
       void SavePlayerScore();
+      vector<int> GetHighScores();
 
       void HandlePlayerProjectileToEnemyCollisions();
       void HandlePlayerProjectileToWallCollisions();
