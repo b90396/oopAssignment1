@@ -31,7 +31,8 @@ int main()
     int randomNumber = 0;
     int volumeCount = 1;
     list <int> highScores;
-    
+    game.GetHighScores();
+
     //Load images
     Texture2D texture = LoadTexture("resources/playerShip.png");
     Texture2D wall = LoadTexture("resources/bwAnimate.png");
@@ -105,7 +106,7 @@ int main()
 
         if (game.IsRunning() && !pause && !gameOver)
         {
-
+           
 
             if (game.player.getLives() == 3){
                 DrawTexture(heart, 680, 220, RED);
@@ -141,6 +142,7 @@ int main()
             }
             if (IsKeyPressed(KEY_M))
             {
+                game.GetHighScores();
                  volumeCount ++;
                  if (volumeCount % 2 == 0) 
                  {
@@ -258,6 +260,7 @@ int main()
         }
         else if(gameOver)
         {
+            game.SavePlayerScore();
              DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
              StopMusicStream(music);
              PlayMusicStream(goMusic);

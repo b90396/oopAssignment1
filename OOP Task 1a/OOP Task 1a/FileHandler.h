@@ -7,6 +7,9 @@ using namespace std;
 
 class FileHandler
 {
+private:
+
+public:
 	FileHandler();
 	~FileHandler();
 

@@ -8,17 +8,10 @@ void FileHandler::WriteToFile(string name, string content)
 {
     ofstream file(name);
 
-    // if file opened successfully...
-    if (file.is_open())
-    {
-        // write content to file.
-        file << content << endl;
-        file.close();
-    }
-    else
-    {
-        cout << "Unable to open file.\n";
-    }
+    file.open(name, ios_base::app);
+    file << content << endl;
+
+    file.close();
 }
 
 string FileHandler::ReadFromFile(string name)
@@ -33,7 +26,7 @@ string FileHandler::ReadFromFile(string name)
         while (getline(file, line))
         {
             // concatenate file content to string.
-            content += line;
+            content += line + " ";
         }
 
         file.close();
