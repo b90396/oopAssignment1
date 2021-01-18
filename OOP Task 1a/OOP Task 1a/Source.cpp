@@ -142,7 +142,6 @@ int main()
             }
             if (IsKeyPressed(KEY_M))
             {
-                game.GetHighScores();
                  volumeCount ++;
                  if (volumeCount % 2 == 0) 
                  {
@@ -286,7 +285,7 @@ int main()
                      UpdateMusicStream(music);
                      game = Game();
                      game.Setup();
-
+                     
               }
         }
         else

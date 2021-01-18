@@ -6,12 +6,19 @@ FileHandler::~FileHandler() {}
 
 void FileHandler::WriteToFile(string name, string content)
 {
-    ofstream file(name);
+    ofstream file(name, ios_base::app | ios_base::out);
 
-    file.open(name, ios_base::app);
-    file << content << endl;
-
-    file.close();
+    // if file opened successfully...
+    if (file.is_open())
+    {
+        // write content to file.
+        file << content << endl;
+        file.close();
+    }
+    else
+    {
+        cout << "Unable to open file.\n";
+    }
 }
 
 string FileHandler::ReadFromFile(string name)
