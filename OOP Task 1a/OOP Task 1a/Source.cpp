@@ -259,14 +259,22 @@ int main()
              StopMusicStream(music);
              PlayMusicStream(goMusic);
              UpdateMusicStream(goMusic);
-            if(volumeCount % 2 ==0)
+            
+            if (IsKeyPressed(KEY_M))
              {
-                SetMusicVolume(goMusic, 0.0f);
+                 volumeCount++;
+                 if (volumeCount % 2 == 0)
+                 {
+                     SetMusicVolume(goMusic, 0.0f);
+                 }
+                 else
+                 {
+                     SetMusicVolume(goMusic, 0.5f);
+
+                 }
              }
-             if (volumeCount % 2 != 0)
-             {
-                 SetMusicVolume(goMusic, 1.0f);
-             }
+            
+            
              DrawText("PRESS (ENTER) TO RESTART", 610, 530, 19, LIGHTGRAY);
              DrawTexture(emptyHeart, 680, 220, RED);
              DrawTexture(emptyHeart, 720, 220, RED);
