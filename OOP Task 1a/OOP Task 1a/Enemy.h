@@ -21,7 +21,7 @@ public:
 	int getXPos();
 	bool setIsHit();
 	bool getIsHit();
-	void move(char direction);	//check position within here with move counter
+	void move(char direction);	
 	void Shoot(vector<EnemyProjectile> &enemyprojectiles);
 
 private:

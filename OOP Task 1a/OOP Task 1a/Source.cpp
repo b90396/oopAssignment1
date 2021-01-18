@@ -132,8 +132,6 @@ int main()
                 game.ProcessInput(KEY_SPACE);
                 playerShootCooldown = 0;
             }
-            //if (IsKeyPressed(KEY_UP))     game.ProcessInput(KEY_UP);
-            //if (IsKeyPressed(KEY_DOWN))   game.ProcessInput(KEY_DOWN);
 
             if (IsKeyPressed(KEY_P))
             {
@@ -224,7 +222,6 @@ int main()
                         enemyDirection = 'D';
                         movedDown = true;
                         break;
-
                     }
                     
                     if (game.enemies[i].getXPos() == 20 && movedDown)
@@ -337,11 +334,9 @@ int main()
                     case PLAYERPROJECTILE: DrawTextureRec(pProj, Rectangle{ rFrameWidth * PPframe,0,rFrameWidth,(float)pProj.height }, Vector2{ xpos,ypos }, WHITE);  break;
 
                     case ENEMYPROJECTILE: DrawTextureRec(eProj, Rectangle{ eProjFrameWidth *EPframe,0,eProjFrameWidth,(float)eProj.height }, Vector2{ xpos,ypos }, WHITE);  break;
-                    default:     assert(false);  // if this hits you probably forgot to add your new tile type :)
+                    default:     assert(false); 
                 }
 
-                // draw lines around each tile, remove this if you don't like it!
-               // DrawRectangleLines(x * cellSize, y * cellSize, cellSize, cellSize, DARKGRAY);
             }
         }
 
