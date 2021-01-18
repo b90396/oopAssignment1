@@ -48,7 +48,7 @@ void Player::Move(int key)
         dy = +1;
         break;
     default:
-        // not a key we care about, so do nothing
+ 
         break;
     }
 

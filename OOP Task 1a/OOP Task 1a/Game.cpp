@@ -188,8 +188,7 @@ bool Game::IsRunning()
     return true;
 }
 
-// to-do
-// remove projectiles that reach end of screen.
+
 void Game::HandlePlayerProjectileToEnemyCollisions()
 {
     for (int i = 0; i < enemies.size(); i++)
