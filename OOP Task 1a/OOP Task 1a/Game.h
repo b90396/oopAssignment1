@@ -3,6 +3,8 @@
 #include <assert.h>	
 #include <string>		
 #include <vector>
+#include <algorithm>
+
 #include "Player.h"
 #include "Wall.h"
 #include "Enemy.h"
@@ -22,6 +24,8 @@ class Game
       vector<Projectile> projectiles;
       vector<PlayerProjectile> playerprojectiles;
       vector<EnemyProjectile> enemyprojectiles;
+      vector<int> ScoreData;
+      vector<int> threeHighestScores;
       FileHandler fh;
       float enemyspeed = 1;
 
@@ -45,7 +49,8 @@ class Game
       bool EnemiesAtEnd();
       
       void SavePlayerScore();
-      vector<int> GetHighScores();
+      void GetScoreDataFromFile();
+      vector<int> GetHighestScores();
       int getScore();
       int getLives();
 

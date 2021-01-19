@@ -302,39 +302,46 @@ void Game::HandleEnemyProjectileToWallCollisions()
 
 void Game::SavePlayerScore()
 {
+    // save the player's score to file...
     fh.WriteToFile("score-data.txt", to_string(getScore()));
 }
 
-vector<int> Game::GetHighScores()
+void Game::GetScoreDataFromFile()
 {
-    vector<int> HighScores;
-    string scoreData = fh.ReadFromFile("score-data.txt");
-    cout << "Current Score Data In File: -\n" << scoreData << endl;
-    char delim = ' ';
+    // read data from file and store in string.
+    string fileData = fh.ReadFromFile("score-data.txt");
 
-    string score = "";
-    for (int i = 0; i < scoreData.size(); i++)
+    char delim = ' ';
+    string tmpScore = "";
+
+    // iterate through file data, store each of the scores into a 'tmpScore' string...  
+    for (int i = 0; i < fileData.size(); i++)
     {
-        if (scoreData[i] != delim)
+        if (fileData[i] != delim)
         {
-            score += scoreData[i];
+            // if current index of FileData is not equal to a space, append it to 'tmpScore'.
+            tmpScore += fileData[i];
         }
         else
         {
-            HighScores.push_back(stoi(score));
-            score = "";
+            // if a space is reached, convert the score to integer and push into the score data vector.
+            ScoreData.push_back(stoi(tmpScore));
+            tmpScore = "";
         }
     }
+}
 
-    cout << "Integer list of the same thing.\n";
+vector<int> Game::GetHighestScores()
+{
+    // find the top 4 highest scores from the file.
+    partial_sort(ScoreData.begin(), ScoreData.begin() + 3, ScoreData.end(), greater<int>());
 
-    for (int i = 0; i < HighScores.size(); i++)
-    {
-        cout << HighScores[i] << endl;
-    }
+    threeHighestScores.push_back(ScoreData[0]);
+    threeHighestScores.push_back(ScoreData[1]);
+    threeHighestScores.push_back(ScoreData[2]);
+    threeHighestScores.push_back(ScoreData[3]);
 
-
-    return HighScores;
+    return threeHighestScores;
 }
 
 void Game::IncreaseSpeed()
