@@ -294,6 +294,7 @@ int main()
               if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
               {
                     gameOver = false;
+                    hasSavedScore = false;
                      //PauseMusicStream(goMusic);
                      PlayMusicStream(music);
                      UpdateMusicStream(music);
