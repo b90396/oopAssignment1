@@ -299,6 +299,50 @@ void Game::HandleEnemyProjectileToWallCollisions()
     }
 }
 
+void Game::SavePlayerScore()
+{
+    // save the player's score to file...
+    fh.WriteToFile("score-data.txt", to_string(getScore()));
+}
+
+void Game::GetScoreDataFromFile()
+{
+    // read data from file and store in string.
+    string fileData = fh.ReadFromFile("score-data.txt");
+
+    char delim = ' ';
+    string tmpScore = "";
+
+    // iterate through file data, store each of the scores into a 'tmpScore' string...  
+    for (int i = 0; i < fileData.size(); i++)
+    {
+        if (fileData[i] != delim)
+        {
+            // if current index of FileData is not equal to a space, append it to 'tmpScore'.
+            tmpScore += fileData[i];
+        }
+        else
+        {
+            // if a space is reached, convert the score to integer and push into the score data vector.
+            ScoreData.push_back(stoi(tmpScore));
+            tmpScore = "";
+        }
+    }
+}
+
+vector<int> Game::GetHighestScores()
+{
+    // find the top 4 highest scores from the file.
+    partial_sort(ScoreData.begin(), ScoreData.begin() + 3, ScoreData.end(), greater<int>());
+
+    threeHighestScores.push_back(ScoreData[0]);
+    threeHighestScores.push_back(ScoreData[1]);
+    threeHighestScores.push_back(ScoreData[2]);
+    threeHighestScores.push_back(ScoreData[3]);
+
+    return threeHighestScores;
+}
+
 void Game::IncreaseSpeed()
 {
     if (enemies.size() % 5 == 0)
