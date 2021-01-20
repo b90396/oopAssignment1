@@ -4,6 +4,7 @@
 #include <list>
 
 void HandleCollisions(Game& game);
+void ResetScoreTable(Game& game);
 
 int main()
 {
@@ -31,7 +32,10 @@ int main()
     int randomNumber = 0;
     int volumeCount = 1;
     list <int> highScores;
-    
+    bool hasSavedScore = false;
+   
+    game.GetScoreDataFromFile();
+
     //Load images
     Texture2D texture = LoadTexture("resources/playerShip.png");
     Texture2D wall = LoadTexture("resources/bwAnimate.png");
@@ -90,6 +94,9 @@ int main()
         UpdateMusicStream(music);
         BeginDrawing();
         ClearBackground(BLACK);
+
+       
+
         DrawTexture(title, 595, 20, YELLOW);
         DrawText(FormatText("SCORE: %i", game.getScore()), 610, 180, 20, LIGHTGRAY);
         DrawText("LIVES: ", 610,230, 20, LIGHTGRAY);
@@ -98,15 +105,16 @@ int main()
         if (highScores.size() != 0)
         {
             DrawText("HIGHSCORE: %i" + highScores.front(), 610, 550, 20, LIGHTGRAY);
-
         }
 
-        
+        DrawText(FormatText("%i", game.GetHighestScores()[0]), 630, 365, 20, LIGHTGRAY);
+        DrawText(FormatText("%i", game.GetHighestScores()[1]), 630, 403, 20, LIGHTGRAY);
+        DrawText(FormatText("%i", game.GetHighestScores()[2]), 630, 437, 20, LIGHTGRAY);
+        DrawText(FormatText("%i", game.GetHighestScores()[3]), 630, 475, 20, LIGHTGRAY);
+
 
         if (game.IsRunning() && !pause && !gameOver)
         {
-
-
             if (game.player.getLives() == 3){
                 DrawTexture(heart, 680, 220, RED);
                 DrawTexture(heart, 720, 220, RED);
@@ -135,6 +143,7 @@ int main()
 
             if (IsKeyPressed(KEY_P))
             {
+                
                 pause = true;
             }
             if (IsKeyPressed(KEY_M))
@@ -255,6 +264,13 @@ int main()
         }
         else if(gameOver)
         {
+            if (!hasSavedScore)
+            {
+                game.SavePlayerScore();
+                hasSavedScore = true;
+            }
+            else {}
+
              DrawText("GAME OVER", 610, 10, 20, LIGHTGRAY);
              StopMusicStream(music);
              PlayMusicStream(goMusic);
@@ -283,12 +299,15 @@ int main()
               if (IsKeyPressed(KEY_ENTER))    //RESETS WHEN ENTER IS PRESSED
               {
                     gameOver = false;
+                    hasSavedScore = false;
                      //PauseMusicStream(goMusic);
                      PlayMusicStream(music);
                      UpdateMusicStream(music);
                      game = Game();
                      game.Setup();
-
+                     
+                     // clear current scores, read file again for new scores.
+                     ResetScoreTable(game);
               }
         }
         else
@@ -363,4 +382,10 @@ void HandleCollisions(Game& game)
     game.HandleProjectileToProjectileCollisions();
     game.HandleEnemyProjectileToPlayerCollisions();
     game.HandleEnemyProjectileToWallCollisions();
+}
+
+void ResetScoreTable(Game& game)
+{
+    game.ScoreData.clear();
+    game.GetScoreDataFromFile();
 }
